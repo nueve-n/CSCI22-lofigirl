@@ -9,8 +9,7 @@ public class Home extends JComponent{
         w = width;
         h = height;
     }
-    
-    
+
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
@@ -19,6 +18,10 @@ public class Home extends JComponent{
         g2d.setRenderingHints(rh);
 
         Rectangle2D.Double bg = new Rectangle2D.Double(0, 0, w, h);
+        g2d.setColor(Color.decode("#ffe5f1"));
+        g2d.fill(bg);
+
+        Rectangle2D.Double bg = new Rectangle2D.Double(w*, 0, w, h);
         g2d.setColor(Color.decode("#ffe5f1"));
         g2d.fill(bg);
     }
