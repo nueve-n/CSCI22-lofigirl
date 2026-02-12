@@ -5,10 +5,13 @@ import javax.swing.*;
 public class Home extends JComponent{
     int w;
     int h;
-    public Home(int width, int height){
+    public Home(int width, int heigh){
         w = width;
-        h = height;
+        
+        h = heigh;
     }
+    
+//hi nadine i am on github
 
     @Override
     protected void paintComponent(Graphics g){
