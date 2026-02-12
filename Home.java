@@ -5,14 +5,11 @@ import javax.swing.*;
 public class Home extends JComponent{
     int w;
     int h;
-    public Home(int width, int heigh){
+    public Home(int width, int height){
         w = width;
-        
-        h = heigh;
+        h = height;
     }
     
-//hi nadine i am on github
-
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
