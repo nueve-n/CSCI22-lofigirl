@@ -24,5 +24,8 @@ public class Home extends JComponent{
         Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
         g2d.setColor(Color.decode("#dbc786"));
         g2d.fill(floor);
+
+        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40,Color.decode("#372403"), g2d);
+        
     }
 }

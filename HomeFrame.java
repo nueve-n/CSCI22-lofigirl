@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class HomeFrame{
     int w, h;
@@ -15,8 +16,14 @@ public class HomeFrame{
     public void setUp(){
         f.setSize(w,h);
         f.setTitle("LofiGirl_MacalalalagxRanario");
-        f.add(homeComponent);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        f.add(panel);
+        panel.add(homeComponent);
+
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }
+
+    
 }
