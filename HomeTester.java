@@ -5,14 +5,8 @@ public class HomeTester{
         //add responsiveness; panel resize listeners
         int w = 800;
         int h = 600;
-        JFrame f = new JFrame();
-
-        Home homeComponent = new Home(w, h);
         
-        f.setSize(w,h);
-        f.setTitle("LofiGirl_MacalalalagxRanario");
-        f.add(homeComponent);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
+        HomeFrame hf = new HomeFrame(w, h);
+        hf.setUp();
     }
 }
