@@ -9,7 +9,7 @@ public class Home extends JComponent{
         w = width;
         h = height;
     }
-    
+
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
