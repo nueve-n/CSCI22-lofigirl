@@ -21,8 +21,8 @@ public class Home extends JComponent{
         g2d.setColor(Color.decode("#ffe5f1"));
         g2d.fill(bg);
 
-        Rectangle2D.Double bg = new Rectangle2D.Double(w*, 0, w, h);
-        g2d.setColor(Color.decode("#ffe5f1"));
-        g2d.fill(bg);
+        Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
+        g2d.setColor(Color.decode("#dbc786"));
+        g2d.fill(floor);
     }
 }
