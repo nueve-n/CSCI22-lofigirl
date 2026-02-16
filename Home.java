@@ -18,14 +18,15 @@ public class Home extends JComponent{
         g2d.setRenderingHints(rh);
 
         Rectangle2D.Double bg = new Rectangle2D.Double(0, 0, w, h);
-        g2d.setColor(Color.decode("#ffe5f1"));
+        g2d.setColor(Color.decode("#ffe495"));
         g2d.fill(bg);
 
         Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
-        g2d.setColor(Color.decode("#dbc786"));
+        g2d.setColor(Color.decode("#5f2e10"));
         g2d.fill(floor);
 
-        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40,Color.decode("#372403"), g2d);
-        
+        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40,Color.decode("#938b7e"), g2d);
+        Shelf shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"), g2d);
+        Mat mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"), g2d);
     }
 }
