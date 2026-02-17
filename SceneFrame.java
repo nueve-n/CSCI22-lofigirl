@@ -1,20 +1,22 @@
+//https://docs.oracle.com/javase/tutorial/uiswing/events/componentlistener.html
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class HomeFrame{
+public class SceneFrame{
     int w, h;
     JFrame f;
     JPanel panel;
-    Home homeComponent;
+    SceneCanvas homeComponent;
 
-    public HomeFrame(int width, int height){
-        //add responsiveness; panel resize listeners
+    public SceneFrame(int width, int height){
         w = width;
         h = height;
         f = new JFrame();
+        f.pack();
         panel = new JPanel(new BorderLayout());
-        homeComponent = new Home(w, h);
+        homeComponent = new SceneCanvas(w, h);
     }
 
     public void setUp(){
@@ -44,7 +46,7 @@ public class HomeFrame{
 
             @Override
             public void componentResized(ComponentEvent e){
-                homeComponent = new Home(panel.getWidth(), panel.getHeight());
+                homeComponent = new SceneCanvas(panel.getWidth(), panel.getHeight());
                 panel.removeAll();
                 panel.add(homeComponent);
                 f.setVisible(true);

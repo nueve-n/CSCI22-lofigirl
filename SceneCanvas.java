@@ -2,12 +2,14 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
-public class Home extends JComponent{
+public class SceneCanvas extends JComponent{
     int w;
     int h;
-    public Home(int width, int height){
+    public SceneCanvas(int width, int height){
         w = width;
         h = height;
+
+        setPreferredSize(new Dimension(800, 600));
     }
 
     @Override
