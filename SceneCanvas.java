@@ -1,13 +1,28 @@
+import java.util.*;
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
 public class SceneCanvas extends JComponent{
-    int w;
-    int h;
-    public SceneCanvas(int width, int height){
+    double w;
+    double h;
+    DrawingObject[] objects;
+    Mat mat;
+    Shelf shelf;
+
+    public SceneCanvas(double width, double height){
         w = width;
         h = height;
+
+        DrawingObject windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"));
+        shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"));
+        mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"));
+
+        objects = new DrawingObject[3];
+
+        objects[0] = shelf;
+        objects[1] = windowWeather;
+        objects[2] = mat;
 
         setPreferredSize(new Dimension(800, 600));
     }
@@ -27,8 +42,15 @@ public class SceneCanvas extends JComponent{
         g2d.setColor(Color.decode("#5f2e10"));
         g2d.fill(floor);
 
-        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"), g2d);
-        Shelf shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"), g2d);
-        Mat mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"), g2d);
+        for(int a = 0; a < objects.length; a++){
+            objects[a].draw(g2d);
+        }
+    }
+    public Mat getMat(){
+        return mat;
+    }
+
+    public Shelf getShelf(){
+        return shelf;
     }
 }

@@ -3,11 +3,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.*;
 
 public class Shelf implements DrawingObject{
     double x, y, w, h;
     Color co, ci;
-    public Shelf(double x, double y, double w, double h, Color co, Color ci, Graphics2D g2d){
+    ArrayList<Rectangle> books;
+    public Shelf(double x, double y, double w, double h, Color co, Color ci){
         this.x = x;
         this.y = y;
         this.w = w;
@@ -15,25 +17,33 @@ public class Shelf implements DrawingObject{
         this.co = co;
         this.ci = ci;
 
-        draw(g2d);
+        books = new ArrayList<Rectangle>();
     }
 
     public void draw(Graphics2D g2d){
-        Rectangle outer = new Rectangle(x, y, w, h, co, g2d);
-        Rectangle inner = new Rectangle(x + w * 0.05, y + h * 0.05, w * 0.9, h * 0.9, ci, g2d);
+        Rectangle outer = new Rectangle(x, y, w, h, co);
+        outer.draw(g2d);
+        Rectangle inner = new Rectangle(x + w * 0.05, y + h * 0.05, w * 0.9, h * 0.9, ci);
+        inner.draw(g2d);
+        Rectangle shelf1 = new Rectangle(x + w*0.05, y + h * 0.33 - h * 0.05, w * 0.9, h *0.05, co);
+        shelf1.draw(g2d);
+        Rectangle shelf2 = new Rectangle(x + w*0.05, y + h * 0.66 - h * 0.05, w * 0.9, h *0.05, co);
+        shelf2.draw(g2d);
 
-        Rectangle shelf1 = new Rectangle(x + w*0.05, y + h * 0.33 - h * 0.05, w * 0.9, h *0.05, co, g2d);
-        Rectangle shelf2 = new Rectangle(x + w*0.05, y + h * 0.66 - h * 0.05, w * 0.9, h *0.05, co, g2d);
-
-        //shelf1
-        drawBooks((y + h * 0.33 - h * 0.05)-(y + h * 0.05), y + h * 0.05, y + h * 0.33 - h * 0.05, g2d);
-        //shelf2
-        drawBooks((y + h * 0.66 - h * 0.05) - ((y + h * 0.33 - h * 0.05) + h *0.05), (y + h * 0.33 - h * 0.05) + h *0.05, y + h * 0.66 - h * 0.05, g2d);
-        //shelf3
-        drawBooks((y + h * 0.05 + h * 0.9) - ((y + h * 0.66 - h * 0.05) + h *0.05), (y + h * 0.66 - h * 0.05) + h *0.05, y + h * 0.05 + h * 0.9, g2d);
+        for(int a = 0; a < books.size(); a++){
+            books.get(a).draw(g2d);
+        }
     }
 
-    public void drawBooks(double rangeH, double maxH, double minH, Graphics2D g2d){
+    public void drawBooksInShelves(){
+        //shelf1
+        drawBooks((y + h * 0.33 - h * 0.05)-(y + h * 0.05), y + h * 0.05, y + h * 0.33 - h * 0.05);
+        //shelf2
+        drawBooks((y + h * 0.66 - h * 0.05) - ((y + h * 0.33 - h * 0.05) + h *0.05), (y + h * 0.33 - h * 0.05) + h *0.05, y + h * 0.66 - h * 0.05);
+        //shelf3
+        drawBooks((y + h * 0.05 + h * 0.9) - ((y + h * 0.66 - h * 0.05) + h *0.05), (y + h * 0.66 - h * 0.05) + h *0.05, y + h * 0.05 + h * 0.9);
+    }
+    public void drawBooks(double rangeH, double maxH, double minH){
         double shelfW = w * 0.9;
         Color[] bookCA = {Color.decode("#6b0a0a"), Color.decode("#0d6b0a"), Color.decode("#1f174b"), Color.decode("#6e370b")};
         double currentW = 0;
@@ -52,13 +62,17 @@ public class Shelf implements DrawingObject{
             if(shelfW - currentW > shelfW*0.15){
                 double bookW = (double)(Math.random() * (shelfW*(0.15) - shelfW*(0.03))) + shelfW*(0.03);
 
-                Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC], g2d);
+                Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
+
+                books.add(book);
                 System.out.println(bookW);
                 currentW += bookW;
             }
             else{
                 double bookW = shelfW - currentW;
-                Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC], g2d);
+                Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
+
+                books.add(book);
                 currentW += bookW;
             }
         }
