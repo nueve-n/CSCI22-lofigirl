@@ -50,7 +50,6 @@ public class Shelf implements DrawingObject{
         int bookCi = -1;
         
         while(currentW < shelfW){
-            System.out.println(currentW);
             double bookH = (double)(Math.random() * (rangeH*0.7)) + maxH;
             int bookC = (int)(Math.random() * 4); 
 
@@ -65,7 +64,6 @@ public class Shelf implements DrawingObject{
                 Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
 
                 books.add(book);
-                System.out.println(bookW);
                 currentW += bookW;
             }
             else{
