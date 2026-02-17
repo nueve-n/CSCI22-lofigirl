@@ -39,6 +39,7 @@ public class SceneFrame{
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+
     }
 
     public void setUpListener(){
