@@ -8,5 +8,6 @@ public class HomeTester{
         
         HomeFrame hf = new HomeFrame(w, h);
         hf.setUp();
+        hf.setUpListener();
     }
 }

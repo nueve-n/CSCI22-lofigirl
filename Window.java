@@ -4,23 +4,22 @@ import java.awt.geom.*;
 
 public class Window implements DrawingObject{
 
-    private double x, y, size;
+    private double x, y, w, h;
     private Color color;
 
-    public Window(double x, double y, double size, Color color, Graphics2D g2d){
+    public Window(double x, double y, double w, double h, Color color, Graphics2D g2d){
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.w = w;
+        this.h = h;
         this.color = color;
 
         draw(g2d);
     }
     @Override
     public void draw(Graphics2D g2d) {
-        Square outer = new Square(x, y, size, color);
-        outer.draw(g2d);
-        Square inner = new Square(x + size * 0.05, y + size * 0.05, size*0.9, Color.WHITE);
-        inner.draw(g2d);
+        Rectangle outer = new Rectangle(x, y, w, h, color, g2d);
+        Rectangle inner = new Rectangle(x + w * 0.05, y + h * 0.05, w*0.9, h*0.9, Color.WHITE, g2d);
     }
 
 }

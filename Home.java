@@ -25,7 +25,7 @@ public class Home extends JComponent{
         g2d.setColor(Color.decode("#5f2e10"));
         g2d.fill(floor);
 
-        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40,Color.decode("#938b7e"), g2d);
+        Window windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"), g2d);
         Shelf shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"), g2d);
         Mat mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"), g2d);
     }
