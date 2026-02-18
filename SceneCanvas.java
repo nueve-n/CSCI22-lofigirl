@@ -6,42 +6,42 @@ import javax.swing.*;
 public class SceneCanvas extends JComponent{
     double w;
     double h;
-    DrawingObject[] objects;
+    ArrayList<DrawingObject> objects;
     Mat mat;
     Shelf shelf;
-    Sun sun;
     Table table;
     Chair chair;
+    Celestial sun;
+    Celestial moon;
+    Bg bg;
+    Window windowWeather;
+    Rectangle outside;
 
     public SceneCanvas(double width, double height){
         w = width;
         h = height;
 
-        DrawingObject windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"), Color.decode("#d6cdc0"));
+        windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"), Color.decode("#d6cdc0"));
         shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"));
         mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"));
-        sun = new Sun(w*0.5 + w*0.13, h*0.1 + h*0.2, w*0.1);
-chair = new Chair(
-        w*0.38,          // left of table
-        h*0.64,          // same floor line
-        w*0.18,
-        h*0.32,
-        Color.decode("#50312f"),
-        Color.decode("#392421"),
-        Color.decode("#2c2020")
-);
-
-
+        chair = new Chair(w*0.50, h*0.60, w*0.35, h * 0.3, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
         table = new Table(w*0.50, h*0.60, w*0.35, h * 0.3, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
+        sun = new Celestial(w*0.5 + w*0.13, h*0.75, w*0.1, Color.decode("#ebb000"), Color.decode("#e3bf55"), Color.decode("#dcc376"), Color.decode("#d9c58a"));
+        moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
+        bg = new Bg(w, h);
+        outside = new Rectangle(0, 0, w, h, Color.decode("#dc8904"));
 
-        objects = new DrawingObject[6];
+        objects = new ArrayList<>();
 
-        objects[0] = shelf;
-        objects[1] = windowWeather;
-        objects[2] = mat;
-        objects[3] = sun;
-        objects[4] = chair;
-        objects[5] = table;
+        objects.add(sun);
+        objects.add(moon);
+        objects.add(bg);
+        objects.add(windowWeather);
+        objects.add(mat);
+        objects.add(shelf);
+        objects.add(chair);
+        objects.add(table);
+
 
         setPreferredSize(new Dimension(800, 600));
     }
@@ -53,23 +53,9 @@ chair = new Chair(
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHints(rh);
 
-        double[] bgx = {0, w, w, w*0.5, w*0.5, w*0.05 + w*0.81, w * 0.05 + w*0.81, w, w, 0};
-        double[] bgy = {0, 0, h*0.1, h*0.1, h*0.1 + h*0.475, h*0.1 + h*0.475, h*0.1, h*0.1, h, h};
-
-        Path2D.Double bg = new Path2D.Double();
-        bg.moveTo(bgx[0], bgy[0]);
-        for(int a = 1; a < 10; a++){
-            bg.lineTo(bgx[a], bgy[a]);
-        }
-        g2d.setColor(Color.decode("#ffe495"));
-        g2d.fill(bg);
-
-        Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
-        g2d.setColor(Color.decode("#5f2e10"));
-        g2d.fill(floor);
-
-        for(int a = 0; a < objects.length; a++){
-            objects[a].draw(g2d);
+        outside.draw(g2d);
+        for(DrawingObject object : objects){
+            object.draw(g2d);
         }
     }
 
@@ -79,5 +65,17 @@ chair = new Chair(
 
     public Shelf getShelf(){
         return shelf;
+    }
+
+    public Celestial getSun(){
+        return sun;
+    }
+
+    public Celestial getMoon(){
+        return moon;
+    }
+
+    public Rectangle getOutside(){
+        return outside;
     }
 }
