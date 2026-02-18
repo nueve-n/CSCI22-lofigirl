@@ -17,8 +17,11 @@ public class Mat implements DrawingObject{
 
     @Override
     public void draw(Graphics2D g2d){
-        Ellipse outer = new Ellipse(x, y, w, h, co, g2d);
-        Ellipse inner = new Ellipse(x + w * 0.05, y + h*0.05, w * 0.9, h *0.9, ci, g2d);
+        Ellipse outer = new Ellipse(x, y, w, h, co);
+        outer.draw(g2d);
+
+        Ellipse inner = new Ellipse(x + w * 0.05, y + h*0.05, w * 0.9, h *0.9, ci);
+        inner.draw(g2d);
     }
 
     public void moveX(double d){

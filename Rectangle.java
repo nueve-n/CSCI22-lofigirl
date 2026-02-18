@@ -21,4 +21,8 @@ public class Rectangle implements DrawingObject{
         g2d.fill(c);
     }
 
+    public void changeColor(Color c){
+        color = c;
+    }
+
 }
