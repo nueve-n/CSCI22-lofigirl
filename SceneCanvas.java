@@ -10,6 +10,8 @@ public class SceneCanvas extends JComponent{
     Mat mat;
     Shelf shelf;
     Sun sun;
+    Table table;
+    Chair chair;
 
     public SceneCanvas(double width, double height){
         w = width;
@@ -19,13 +21,27 @@ public class SceneCanvas extends JComponent{
         shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"));
         mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"));
         sun = new Sun(w*0.5 + w*0.13, h*0.1 + h*0.2, w*0.1);
+chair = new Chair(
+        w*0.38,          // left of table
+        h*0.64,          // same floor line
+        w*0.18,
+        h*0.32,
+        Color.decode("#50312f"),
+        Color.decode("#392421"),
+        Color.decode("#2c2020")
+);
 
-        objects = new DrawingObject[4];
+
+        table = new Table(w*0.50, h*0.60, w*0.35, h * 0.3, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
+
+        objects = new DrawingObject[6];
 
         objects[0] = shelf;
         objects[1] = windowWeather;
         objects[2] = mat;
         objects[3] = sun;
+        objects[4] = chair;
+        objects[5] = table;
 
         setPreferredSize(new Dimension(800, 600));
     }
