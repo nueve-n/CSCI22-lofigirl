@@ -1,4 +1,5 @@
 //https://docs.oracle.com/javase/tutorial/uiswing/events/componentlistener.html
+//https://youtu.be/tHNWIWxRDDA
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class SceneFrame{
 
     public void setUp(){
         f.setSize(w,h);
+        w = f.getWidth();
+        h = f.getHeight();
         f.setTitle("LofiGirl_MacalalalagxRanario");
         f.add(panel);
         f.add(panelS, BorderLayout.SOUTH);
@@ -39,7 +42,109 @@ public class SceneFrame{
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+    }
 
+    public void setUpTimer(){
+        ActionListener TimedAction = new ActionListener(){
+            public static int don = 0;
+            public static int current = 0;
+
+            @Override 
+            public void actionPerformed(ActionEvent ae){
+                double sunYU = sceneComponent.getSun().getYU();
+                double sunYD = sceneComponent.getSun().getYD();
+
+                double moonYU = sceneComponent.getMoon().getYU();
+                double moonYD = sceneComponent.getMoon().getYD();
+
+                if(don == 0){ //day
+                    if(current == 0){ //sunrise
+                        if(sunYU - h*0.005 > 0){
+                            sceneComponent.getSun().adjustY(-1*h*0.0025);
+
+                            if(sunYU > h*0.40){
+                                sceneComponent.getOutside().changeColor(Color.decode("#dc8904"));
+                            }
+                            else{
+                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"));
+                            }
+
+                            f.repaint();
+                        }
+                        else{
+                            sceneComponent.getSun().adjustY(-1*sunYU);
+                            
+                            f.repaint();
+                            current = 1;
+                        }
+                    }
+                    else{ //sunset
+                        if(sunYD + h*0.005 < f.getHeight()){
+                            sceneComponent.getSun().adjustY(h*0.0025);
+
+                            if(sunYU > h*0.40){
+                                sceneComponent.getOutside().changeColor(Color.decode("#e20181"));
+                            }
+                            else{
+                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"));
+                            }
+
+                            f.repaint();
+                            
+                        }
+                        else{
+                            sceneComponent.getSun().adjustY(h - sunYD);
+                            f.repaint();
+                            current = 0;
+                            don = 1;
+                        }
+                    }
+                }
+                else{ //night
+                    if(current == 0){ //dusk
+                        if(moonYU - h*0.005 > 0){
+                            sceneComponent.getMoon().adjustY(-1*h*0.0025);
+                            
+                            if(moonYU > h*0.40){
+                                sceneComponent.getOutside().changeColor(Color.decode("#290752"));
+                            }
+                            else{
+                                sceneComponent.getOutside().changeColor(Color.decode("#040731"));
+                            }
+
+                            f.repaint();
+                        }
+                        else{
+                            sceneComponent.getMoon().adjustY(-1*moonYU);
+                            f.repaint();
+                            current = 1;
+                        }
+                    }
+                    else{ //dawn
+                        if(moonYD + h*0.005 < f.getHeight()){
+                            sceneComponent.getMoon().adjustY(h*0.0025);
+
+                            if(moonYU > h*0.40){
+                                sceneComponent.getOutside().changeColor(Color.decode("#4b2107"));
+                            }
+                            else{
+                                sceneComponent.getOutside().changeColor(Color.decode("#040731"));
+                            }
+
+                            f.repaint();
+                        }
+                        else{
+                            sceneComponent.getMoon().adjustY(h - moonYD);
+                            f.repaint();
+                            current = 0;
+                            don = 0;
+                        }
+                    }
+                }
+            }
+        };
+        Timer timer = new Timer(50, TimedAction);
+        timer.start();
     }
 
     public void setUpListener(){
@@ -94,7 +199,7 @@ public class SceneFrame{
                 sceneComponent = new SceneCanvas(f.getWidth(), f.getHeight());
                 sceneComponent.getShelf().drawBooksInShelves();
                 panel.add(sceneComponent);
-                f.setVisible(true);
+                f.setVisible(true); 
             }
         };
         panel.addComponentListener(HomeFrameListener);

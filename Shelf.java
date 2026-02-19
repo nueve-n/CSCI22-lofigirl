@@ -9,6 +9,9 @@ public class Shelf implements DrawingObject{
     double x, y, w, h;
     Color co, ci;
     ArrayList<Rectangle> books;
+    ArrayList<Rectangle> stripes;
+    ArrayList<Ellipse> tags;
+
     public Shelf(double x, double y, double w, double h, Color co, Color ci){
         this.x = x;
         this.y = y;
@@ -18,6 +21,8 @@ public class Shelf implements DrawingObject{
         this.ci = ci;
 
         books = new ArrayList<Rectangle>();
+        stripes = new ArrayList<Rectangle>();
+        tags = new ArrayList<Ellipse>();
     }
 
     public void draw(Graphics2D g2d){
@@ -32,6 +37,14 @@ public class Shelf implements DrawingObject{
 
         for(int a = 0; a < books.size(); a++){
             books.get(a).draw(g2d);
+        }
+
+        for(int a = 0; a < stripes.size(); a++){
+            stripes.get(a).draw(g2d);
+        }
+
+        for(int a = 0; a < tags.size(); a++){
+            tags.get(a).draw(g2d);
         }
     }
 
@@ -62,15 +75,27 @@ public class Shelf implements DrawingObject{
                 double bookW = (double)(Math.random() * (shelfW*(0.15) - shelfW*(0.03))) + shelfW*(0.03);
 
                 Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
-
                 books.add(book);
+
+                Rectangle stripe = new Rectangle(x + w*0.05 + currentW, bookH + (minH - bookH)*0.2, bookW, (minH - bookH)*0.05, Color.decode("#b08204"));
+                stripes.add(stripe);
+
+                Ellipse tag = new Ellipse(x + w*0.05 + currentW + bookW*0.25, bookH + (minH - bookH)*0.3, bookW*0.5, (minH - bookH)*0.2, Color.decode("#c4920a"));
+                tags.add(tag);
+
                 currentW += bookW;
             }
             else{
                 double bookW = shelfW - currentW;
                 Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
-
                 books.add(book);
+
+                Rectangle stripe = new Rectangle(x + w*0.05 + currentW, bookH + (minH - bookH)*0.2, bookW, (minH - bookH)*0.05, Color.decode("#b08204"));
+                stripes.add(stripe);
+
+                Ellipse tag = new Ellipse(x + w*0.05 + currentW + bookW*0.25, bookH + (minH - bookH)*0.3, bookW*0.5, (minH - bookH)*0.2, Color.decode("#b08204"));
+                tags.add(tag);
+
                 currentW += bookW;
             }
         }

@@ -1,0 +1,44 @@
+import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.*;
+
+public class Bg implements DrawingObject{
+    double w, h;
+    public Bg(double w, double h){
+        this.w = w;
+        this.h = h;
+    }
+
+    public void draw(Graphics2D g2d){
+        //bg proper
+        double[] bgx = {0, w, w, w*0.5, w*0.5, w*0.05 + w*0.81, w * 0.05 + w*0.81, w, w, 0};
+        double[] bgy = {0, 0, h*0.1, h*0.1, h*0.1 + h*0.475, h*0.1 + h*0.475, h*0.1, h*0.1, h, h};
+
+        Path2D.Double bg = new Path2D.Double();
+        bg.moveTo(bgx[0], bgy[0]);
+        for(int a = 1; a < 10; a++){
+            bg.lineTo(bgx[a], bgy[a]);
+        }
+        bg.closePath();
+        g2d.setColor(Color.decode("#ffe495"));
+        g2d.fill(bg);
+
+        //bg shadow
+        double[] bgSx = {0, w, w * 0.05 + w*0.81, w*0.5, w*0.5, w*0.125 + w*0.25, 0};
+        double[] bgSy = {0, 0, h*0.1, h*0.1, h*0.1 + h*0.475, h*0.75, h*0.75};
+
+        Path2D.Double bgS = new Path2D.Double();
+        bgS.moveTo(bgSx[0], bgSy[0]);
+        for(int a = 1; a < 7; a++){
+            bgS.lineTo(bgSx[a], bgSy[a]);
+        }
+        bgS.closePath();
+        g2d.setColor(Color.decode("#e9d188"));
+        g2d.fill(bgS);
+
+        //floor
+        Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
+        g2d.setColor(Color.decode("#5f2e10"));
+        g2d.fill(floor);
+    }
+}

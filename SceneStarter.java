@@ -8,11 +8,7 @@ public class SceneStarter{
         
         SceneFrame hf = new SceneFrame(w, h);
         hf.setUp();
+        hf.setUpTimer();
         hf.setUpListener();
-
-        Timer timer = new Timer();
-        TimerTask clock = new Clock();
-
-        timer.schedule(clock, 2000, 2000);
     }
 }

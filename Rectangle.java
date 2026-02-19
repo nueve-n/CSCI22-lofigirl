@@ -18,4 +18,9 @@ public class Rectangle implements DrawingObject{
         g2d.setColor(color);
         g2d.fill(new Rectangle2D.Double(x, y, w, h));
     }
+
+    public void changeColor(Color c){
+        color = c;
+    }
+
 }
