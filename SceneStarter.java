@@ -9,6 +9,7 @@ public class SceneStarter{
         SceneFrame hf = new SceneFrame(w, h);
         hf.setUp();
         hf.setUpTimer();
+        hf.setUpMusic();
         hf.setUpListener();
     }
 }

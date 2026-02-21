@@ -1,16 +1,21 @@
 //https://docs.oracle.com/javase/tutorial/uiswing/events/componentlistener.html
 //https://youtu.be/tHNWIWxRDDA
+//https://www.baeldung.com/java-play-sound
+//https://www.geeksforgeeks.org/java/play-audio-file-using-java/
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.sound.sampled.*;
 
 public class SceneFrame{
     int w, h;
+    int currentTrack;
     JFrame f;
-    JPanel panel, panelS;
+    JPanel panel, panelS, matPanel;
     SceneCanvas sceneComponent;
     JButton moveMatR, moveMatL;
+    JButton lastTrack, pauseOrPlay, nextTrack;
 
     public SceneFrame(int width, int height){
         w = width;
@@ -19,12 +24,19 @@ public class SceneFrame{
         f.pack();
 
         panel = new JPanel(new BorderLayout());
-        panelS = new JPanel(new GridLayout(0,3));
+        panelS = new JPanel(new GridLayout(0,4));
+        matPanel = new JPanel(new GridLayout(0,2));
+
         sceneComponent = new SceneCanvas(w, h);
         sceneComponent.getShelf().drawBooksInShelves();
+        sceneComponent.getStars().drawStars();
+        moveMatR = new JButton("➡️");
+        moveMatL = new JButton("⬅️");
 
-        moveMatR = new JButton("->");
-        moveMatL = new JButton("<-");
+        lastTrack = new JButton("⏮️");
+        pauseOrPlay = new JButton("⏸️");
+        nextTrack = new JButton("⏭️");
+        
     }
 
     public void setUp(){
@@ -37,11 +49,98 @@ public class SceneFrame{
 
         panel.add(sceneComponent);
 
-        panelS.add(moveMatL);
-        panelS.add(moveMatR);
+        panelS.add(lastTrack);
+        panelS.add(pauseOrPlay);
+        panelS.add(nextTrack);
+        panelS.add(matPanel);
+
+        matPanel.add(moveMatL);
+        matPanel.add(moveMatR);
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+    }
+
+    public void setUpMusic(){
+        String[] soundTracks = {"track1.wav", "track2.wav", "track3.wav"};
+        currentTrack = (int) (Math.random() * 3);
+
+        try{
+            AudioPlayer  audioPlayer = new AudioPlayer(soundTracks[currentTrack]);
+
+            LineListener TrackListener = new LineListener(){
+                @Override
+
+                public void update(LineEvent event){
+                    //if audio ended
+                    if(audioPlayer.getClip().getFramePosition() >= audioPlayer.getClip().getFrameLength()){
+                        if(currentTrack == 2){
+                            currentTrack = 0;
+                        }
+                        else{
+                            currentTrack++;
+                        }
+
+                        audioPlayer.switchTrack(soundTracks[currentTrack]);
+                        audioPlayer.getClip().addLineListener(this);
+                    }
+                }
+            };
+
+            audioPlayer.getClip().addLineListener(TrackListener);
+            audioPlayer.play();
+
+            //buttons
+            ActionListener TrackButtons = new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent ae){
+
+                    if(ae.getSource() == lastTrack){
+                        if(currentTrack == 0){
+                            currentTrack = 2;
+                        }
+                        else{
+                            currentTrack--;
+                        }
+
+                        audioPlayer.switchTrack(soundTracks[currentTrack]);
+                        audioPlayer.getClip().addLineListener(TrackListener);
+                        pauseOrPlay.setText("⏸️");
+                    }
+
+                    else if(ae.getSource() == nextTrack){
+                        if(currentTrack == 2){
+                            currentTrack = 0;
+                        }
+                        else{
+                            currentTrack++;
+                        }
+
+                        audioPlayer.switchTrack(soundTracks[currentTrack]);
+                        audioPlayer.getClip().addLineListener(TrackListener);
+                        pauseOrPlay.setText("⏸️");
+                    }
+
+                    else if(ae.getSource() == pauseOrPlay){
+                        if(audioPlayer.getStatus() == "play"){
+                            audioPlayer.pause();
+                            pauseOrPlay.setText("▶️");
+                        }
+                        else{
+                            audioPlayer.play();
+                            pauseOrPlay.setText("⏸️");
+                        }
+                    }
+                }
+            };
+
+            lastTrack.addActionListener(TrackButtons);
+            nextTrack.addActionListener(TrackButtons);
+            pauseOrPlay.addActionListener(TrackButtons);
+        }
+        catch (Exception ex){
+            System.out.println("Error");
+        }
     }
 
     public void setUpTimer(){
@@ -198,6 +297,7 @@ public class SceneFrame{
                 panel.removeAll();
                 sceneComponent = new SceneCanvas(f.getWidth(), f.getHeight());
                 sceneComponent.getShelf().drawBooksInShelves();
+                sceneComponent.getStars().drawStars();
                 panel.add(sceneComponent);
                 f.setVisible(true); 
             }

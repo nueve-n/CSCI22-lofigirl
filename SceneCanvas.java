@@ -13,6 +13,7 @@ public class SceneCanvas extends JComponent{
     Chair chair;
     Celestial sun;
     Celestial moon;
+    Stars stars;
     Bg bg;
     Window windowWeather;
     Rectangle outside;
@@ -30,9 +31,11 @@ public class SceneCanvas extends JComponent{
         moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
         bg = new Bg(w, h);
         outside = new Rectangle(0, 0, w, h, Color.decode("#dc8904"));
+        stars = new Stars(w*0.5, h*0.1, w*0.40, h*0.5);
 
         objects = new ArrayList<>();
 
+        objects.add(stars);
         objects.add(sun);
         objects.add(moon);
         objects.add(bg);
@@ -77,5 +80,9 @@ public class SceneCanvas extends JComponent{
 
     public Rectangle getOutside(){
         return outside;
+    }
+
+    public Stars getStars(){
+        return stars;
     }
 }
