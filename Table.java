@@ -14,13 +14,14 @@ public class Table implements DrawingObject {
         this.shadow2 = shadow2;
 
     }
+
     @Override
     public void draw(Graphics2D g2d) {
         Quadrilateral tableTop = new Quadrilateral(x + w * 0.2, y, x + w*0.9, y, x + w, y + h*0.70, x, y + h * 0.70, light);
         Rectangle width = new Rectangle(x, y + h * 0.70, w, h * 0.14, shadow1);
         Rectangle support = new Rectangle(x + w * 0.20, y + h * 0.84, w * 0.60, h * 0.11, shadow2);
-        Rectangle foot1 = new Rectangle(x + w * 0.10, y + h * 0.84, w * 0.10, h * 0.2, shadow2);
-        Rectangle foot2 = new Rectangle(x + w * 0.80, y + h * 0.84, w * 0.10, h * 0.2, shadow2);
+        Rectangle foot1 = new Rectangle(x + w * 0.10, y + h * 0.84, w * 0.10, h * 0.8, shadow2);
+        Rectangle foot2 = new Rectangle(x + w * 0.80, y + h * 0.84, w * 0.10, h * 0.8, shadow2);
         tableTop.draw(g2d);
         width.draw(g2d);
         foot1.draw(g2d);
