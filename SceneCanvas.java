@@ -17,6 +17,7 @@ public class SceneCanvas extends JComponent{
     Bg bg;
     Window windowWeather;
     Rectangle outside;
+    Girl girl;
 
     public SceneCanvas(double width, double height){
         w = width;
@@ -25,13 +26,34 @@ public class SceneCanvas extends JComponent{
         windowWeather = new Window(w*0.5, h*0.1, w*0.40, h*0.5, Color.decode("#938b7e"), Color.decode("#d6cdc0"));
         shelf = new Shelf(w*0.125 , h*0.1, w*0.25, h*0.65, Color.decode("#372403"), Color.decode("#4d3101"));
         mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"));
-        chair = new Chair(w*0.40, h*0.47, w*0.20, h * 0.35, Color.decode("#d6827d"), Color.decode("#b25b4e"), Color.decode("#2c2c2c"));
-        table = new Table(w*0.50, h*0.60, w*0.35, h * 0.3, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
+        chair = new Chair(w*0.43, h*0.56, w*0.13, h * 0.30, Color.decode("#d6827d"), Color.decode("#b25b4e"), Color.decode("#2c2c2c"));
+        table = new Table(w*0.50, h*0.60, w*0.35, h * 0.20, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
         sun = new Celestial(w*0.5 + w*0.13, h*0.75, w*0.1, Color.decode("#ebb000"), Color.decode("#e3bf55"), Color.decode("#dcc376"), Color.decode("#d9c58a"));
         moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
         bg = new Bg(w, h);
         outside = new Rectangle(0, 0, w, h, Color.decode("#dc8904"));
         stars = new Stars(w*0.5, h*0.1, w*0.40, h*0.5);
+
+        // public Girl(
+        // double x, double y, double w, 
+        // Color skin, 
+        // Color socks2, Color socks1, 
+        // Color pants2, Color pants1, 
+        // Color sweater, 
+        // Color hair, 
+        // Color headphonesOuter, Color headphonesInner)
+        girl = new Girl(
+            w * 0.475, h * 0.455, w * 0.16,
+            Color.decode("#a45341"),
+            Color.decode("#1d1312"),
+            Color.decode("#0e0a09"),
+            Color.decode("#81614c"),
+            Color.decode("#907563"),
+            Color.decode("#01221d"),
+            Color.decode("#301210"),
+            Color.decode("#a05884"),
+            Color.decode("#170e11")
+        );
 
         objects = new ArrayList<>();
 
@@ -43,6 +65,7 @@ public class SceneCanvas extends JComponent{
         objects.add(mat);
         objects.add(shelf);
         objects.add(chair);
+        objects.add(girl);
         objects.add(table);
 
 
