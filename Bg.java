@@ -40,5 +40,18 @@ public class Bg implements DrawingObject{
         Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
         g2d.setColor(Color.decode("#5f2e10"));
         g2d.fill(floor);
+
+        //shelf to floor shadow
+        double[] fSx = {0, w*0.125 + w*0.25, w*0.125, 0};
+        double[] fSy = {h*0.75, h*0.75, h, h};
+
+        Path2D.Double fS = new Path2D.Double();
+        fS.moveTo(fSx[0], fSy[0]);
+        for(int a = 1; a < 4; a++){
+            fS.lineTo(fSx[a], fSy[a]);
+        }
+        fS.closePath();
+        g2d.setColor(Color.decode("#4a240d"));
+        g2d.fill(fS);
     }
 }

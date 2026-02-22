@@ -28,7 +28,7 @@ public class Stars implements DrawingObject{
     }
 
     public void drawStars(){
-
+        stars = new ArrayList<Celestial>();
         for(int a = 0; a < Math.round((w*h)/4000); a++){
             double starx = (double)(Math.random() * w) + x;
             double stary = (double)(Math.random() * h) + y;

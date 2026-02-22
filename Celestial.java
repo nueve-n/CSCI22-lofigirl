@@ -37,4 +37,8 @@ public class Celestial implements DrawingObject{
     public void adjustY(double addY){
         y += addY;
     }
+
+    public void changeY(double newY){
+        y = newY;
+    }
 }

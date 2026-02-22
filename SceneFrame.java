@@ -2,6 +2,12 @@
 //https://youtu.be/tHNWIWxRDDA
 //https://www.baeldung.com/java-play-sound
 //https://www.geeksforgeeks.org/java/play-audio-file-using-java/
+//https://emojipedia.org/
+//https://docs.oracle.com/javase/8/docs/api/javax/sound/sampled/Clip.html
+//https://pixabay.com/music/lofi-lofi-chill-487321/
+//https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/
+//https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +17,7 @@ import javax.sound.sampled.*;
 public class SceneFrame{
     int w, h;
     int currentTrack;
+    public static int don, current;
     JFrame f;
     JPanel panel, panelS, matPanel;
     SceneCanvas sceneComponent;
@@ -20,6 +27,8 @@ public class SceneFrame{
     public SceneFrame(int width, int height){
         w = width;
         h = height;
+        don = 0;
+        current = 0;
         f = new JFrame();
         f.pack();
 
@@ -41,6 +50,7 @@ public class SceneFrame{
 
     public void setUp(){
         f.setSize(w,h);
+        f.setFocusable(true);
         w = f.getWidth();
         h = f.getHeight();
         f.setTitle("LofiGirl_MacalalalagxRanario");
@@ -145,9 +155,6 @@ public class SceneFrame{
 
     public void setUpTimer(){
         ActionListener TimedAction = new ActionListener(){
-            public static int don = 0;
-            public static int current = 0;
-
             @Override 
             public void actionPerformed(ActionEvent ae){
                 double sunYU = sceneComponent.getSun().getYU();
@@ -224,7 +231,7 @@ public class SceneFrame{
                             sceneComponent.getMoon().adjustY(h*0.0025);
 
                             if(moonYU > h*0.40){
-                                sceneComponent.getOutside().changeColor(Color.decode("#4b2107"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#290752"));
                             }
                             else{
                                 sceneComponent.getOutside().changeColor(Color.decode("#040731"));
@@ -303,6 +310,51 @@ public class SceneFrame{
             }
         };
         panel.addComponentListener(HomeFrameListener);
+
+        KeyListener keyCommands = new KeyListener(){
+            @Override
+
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() == 68){
+                    sceneComponent.getSun().changeY(panel.getHeight());
+                    sceneComponent.getMoon().changeY(panel.getHeight());
+                    don = 0;
+                    current = 0;
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 78){
+                    sceneComponent.getSun().changeY(panel.getHeight());
+                    sceneComponent.getMoon().changeY(panel.getHeight());
+                    don = 1;
+                    current = 0;
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 83){
+                    sceneComponent.getStars().drawStars();
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 66){
+                    sceneComponent.getShelf().drawBooksInShelves();
+                    f.repaint();
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+
+        f.addKeyListener(keyCommands);
+        moveMatR.addKeyListener(keyCommands);
+        moveMatL.addKeyListener(keyCommands);
+        pauseOrPlay.addKeyListener(keyCommands);
+        nextTrack.addKeyListener(keyCommands);
+        lastTrack.addKeyListener(keyCommands);
     }
     
 }

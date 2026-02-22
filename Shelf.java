@@ -49,6 +49,10 @@ public class Shelf implements DrawingObject{
     }
 
     public void drawBooksInShelves(){
+        books = new ArrayList<Rectangle>();
+        stripes = new ArrayList<Rectangle>();
+        tags = new ArrayList<Ellipse>();
+        
         //shelf1
         drawBooks((y + h * 0.33 - h * 0.05)-(y + h * 0.05), y + h * 0.05, y + h * 0.33 - h * 0.05);
         //shelf2
