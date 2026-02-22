@@ -3,13 +3,14 @@ import java.awt.geom.*;
 
 public class Girl implements DrawingObject {
     static double baseWidth = 625.4;
+    static double baseHeight = 1291.3;
     static double baseX = 67.9;
     static double baseY = 35;
-    double x, y, w;
+    double x, y, w, h;
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
 
     public Girl(
-        double x, double y, double w, 
+        double x, double y, double w, double h, 
         Color skinC, 
         Color socks2C, Color socks1C, 
         Color pants2C, Color pants1C, 
@@ -19,6 +20,7 @@ public class Girl implements DrawingObject {
         this.x = x;
         this.y = y;
         this.w = w;
+        this.h = h;
         this.skinC = skinC;
         this.socks2C = socks2C;
         this.socks1C = socks1C;
@@ -111,7 +113,7 @@ public class Girl implements DrawingObject {
         AffineTransform at = new AffineTransform();
 
         at.translate(x, y);
-        at.scale(w/baseWidth, w/baseWidth);
+        at.scale(w/baseWidth, h/baseHeight);
         at.translate(-baseX, -baseY);
 
         g2d.setColor(skinC);
