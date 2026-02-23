@@ -110,6 +110,26 @@ public class Girl implements DrawingObject {
         socks2.quadTo(542.0, 1241.9, 544.5, 1199.5);
         socks2.closePath();
 
+        Path2D.Double eyebrow = new Path2D.Double();
+        eyebrow.moveTo(370.3, 216.3);
+        eyebrow.quadTo(402.5, 203.2, 415.2, 224.7);
+        eyebrow.quadTo(389.5, 215.2, 371.3, 222.1);
+        eyebrow.closePath();
+
+        Line2D.Double eyelash = new Line2D.Double(
+            374.5, 236.3, 401.8, 238.9
+        );
+       
+        Ellipse2D.Double eye = new Ellipse2D.Double(
+            384.6, 234.8, 15.0, 20.0
+        );
+
+        Path2D.Double hairtie = new Path2D.Double();
+        hairtie.moveTo(232.1, 24.4);
+        hairtie.quadTo(197.7, 41.1, 170.9, 99.9);
+        hairtie.quadTo(207.6, 47.0, 243.5, 36.9);
+        hairtie.closePath();
+        
         AffineTransform at = new AffineTransform();
 
         at.translate(x, y);
@@ -145,5 +165,18 @@ public class Girl implements DrawingObject {
         
         g2d.setColor(headphonesInnerC);
         g2d.fill(at.createTransformedShape(headphones2));
+
+        g2d.setColor(hairC);
+        g2d.fill(at.createTransformedShape(eyebrow));
+
+        g2d.setColor(hairC);
+        g2d.setStroke(new BasicStroke((float) (h * 0.0035)));
+        g2d.draw(at.createTransformedShape(eyelash));
+
+        g2d.setColor(hairC);
+        g2d.fill(at.createTransformedShape(eye));
+
+        g2d.setColor(sweaterC);
+        g2d.fill(at.createTransformedShape(hairtie));
     }
 }
