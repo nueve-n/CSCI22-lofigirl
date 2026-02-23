@@ -17,8 +17,10 @@ public class SceneCanvas extends JComponent{
     Stars stars;
     Bg bg;
     Window windowWeather;
-    Rectangle outside;
+    Sky outside;
     Girl girl;
+    Lamp lamp;
+    StudyLamp studyLamp;
 
     public SceneCanvas(double width, double height){
         w = width;
@@ -33,8 +35,10 @@ public class SceneCanvas extends JComponent{
         sun = new Celestial(w*0.5 + w*0.13, h*0.75, w*0.1, Color.decode("#ebb000"), Color.decode("#e3bf55"), Color.decode("#dcc376"), Color.decode("#d9c58a"));
         moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
         bg = new Bg(w, h);
-        outside = new Rectangle(0, 0, w, h, Color.decode("#dc8904"));
+        outside = new Sky(w, h, Color.decode("#eaa02a"), Color.decode("#ebb258"), Color.decode("#f3c67f"));
         stars = new Stars(w*0.5, h*0.1, w*0.40, h*0.5);
+        lamp = new Lamp(w*0.02, h*0.375, w*0.1, h*0.4);
+        studyLamp = new StudyLamp(w*0.5 + w*0.25, h*0.4, w*0.2, h*0.45);
 
         // public Girl(
         // double x, double y, double w, 
@@ -70,6 +74,8 @@ public class SceneCanvas extends JComponent{
         objects.add(chair);
         objects.add(girl);
         objects.add(table);
+        objects.add(lamp);
+        objects.add(studyLamp);
 
 
         setPreferredSize(new Dimension(800, 600));
@@ -104,11 +110,19 @@ public class SceneCanvas extends JComponent{
         return moon;
     }
 
-    public Rectangle getOutside(){
+    public Sky getOutside(){
         return outside;
     }
 
     public Stars getStars(){
         return stars;
+    }
+
+    public Bg getBg(){
+        return bg;
+    }
+
+    public Lamp getLamp(){
+        return lamp;
     }
 }

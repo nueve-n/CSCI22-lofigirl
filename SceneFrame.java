@@ -2,6 +2,13 @@
 //https://youtu.be/tHNWIWxRDDA
 //https://www.baeldung.com/java-play-sound
 //https://www.geeksforgeeks.org/java/play-audio-file-using-java/
+//https://emojipedia.org/
+//https://docs.oracle.com/javase/8/docs/api/javax/sound/sampled/Clip.html
+//https://pixabay.com/music/lofi-lofi-chill-487321/
+//https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/
+//https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/
+//https://www.geeksforgeeks.org/java/java-keylistener-in-awt/
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +18,7 @@ import javax.sound.sampled.*;
 public class SceneFrame{
     int w, h;
     int currentTrack;
+    public static int don, current;
     JFrame f;
     JPanel panel, panelS, matPanel;
     SceneCanvas sceneComponent;
@@ -20,6 +28,8 @@ public class SceneFrame{
     public SceneFrame(int width, int height){
         w = width;
         h = height;
+        don = 0;
+        current = 0;
         f = new JFrame();
         f.pack();
 
@@ -41,6 +51,7 @@ public class SceneFrame{
 
     public void setUp(){
         f.setSize(w,h);
+        f.setFocusable(true);
         w = f.getWidth();
         h = f.getHeight();
         f.setTitle("LofiGirl_MacalalalagxRanario");
@@ -145,9 +156,6 @@ public class SceneFrame{
 
     public void setUpTimer(){
         ActionListener TimedAction = new ActionListener(){
-            public static int don = 0;
-            public static int current = 0;
-
             @Override 
             public void actionPerformed(ActionEvent ae){
                 double sunYU = sceneComponent.getSun().getYU();
@@ -155,17 +163,20 @@ public class SceneFrame{
 
                 double moonYU = sceneComponent.getMoon().getYU();
                 double moonYD = sceneComponent.getMoon().getYD();
-
                 if(don == 0){ //day
                     if(current == 0){ //sunrise
                         if(sunYU - h*0.005 > 0){
                             sceneComponent.getSun().adjustY(-1*h*0.0025);
 
                             if(sunYU > h*0.40){
-                                sceneComponent.getOutside().changeColor(Color.decode("#dc8904"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#eaa02a"), Color.decode("#ebb258"), Color.decode("#f3c67f"));
+                                sceneComponent.getBg().changeColor(Color.decode("#e3ab61"), Color.decode("#cf9850"), Color.decode("#6e3f16"), Color.decode("#643913"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
-                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"), Color.decode("#9fd4ff"), Color.decode("#8fcdff"));
+                                sceneComponent.getBg().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 0));
                             }
 
                             f.repaint();
@@ -182,14 +193,18 @@ public class SceneFrame{
                             sceneComponent.getSun().adjustY(h*0.0025);
 
                             if(sunYU > h*0.40){
-                                sceneComponent.getOutside().changeColor(Color.decode("#e20181"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#f050ab"), Color.decode("#f668b9"), Color.decode("#fd7dc6"));
+                                sceneComponent.getBg().changeColor(Color.decode("#ffc895"), Color.decode("#e7b586"), Color.decode("#6e3511"), Color.decode("#5f2e10"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
-                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"), Color.decode("#9fd4ff"), Color.decode("#8fcdff"));
+                                sceneComponent.getBg().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 0));
                             }
 
                             f.repaint();
-                            
+
                         }
                         else{
                             sceneComponent.getSun().adjustY(h - sunYD);
@@ -205,10 +220,15 @@ public class SceneFrame{
                             sceneComponent.getMoon().adjustY(-1*h*0.0025);
                             
                             if(moonYU > h*0.40){
-                                sceneComponent.getOutside().changeColor(Color.decode("#290752"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#330d62"), Color.decode("#290752"), Color.decode("#220645"));
+                                sceneComponent.getBg().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
-                                sceneComponent.getOutside().changeColor(Color.decode("#040731"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#040731"), Color.decode("#030521"), Color.decode("#010319"));
+                                sceneComponent.getBg().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
+                                sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
+
                             }
 
                             f.repaint();
@@ -224,10 +244,12 @@ public class SceneFrame{
                             sceneComponent.getMoon().adjustY(h*0.0025);
 
                             if(moonYU > h*0.40){
-                                sceneComponent.getOutside().changeColor(Color.decode("#4b2107"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#330d62"), Color.decode("#290752"), Color.decode("#220645"));
+                                sceneComponent.getBg().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
                             }
                             else{
-                                sceneComponent.getOutside().changeColor(Color.decode("#040731"));
+                                sceneComponent.getOutside().changeColor(Color.decode("#040731"), Color.decode("#030521"), Color.decode("#010319"));
+                                sceneComponent.getBg().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
                             }
 
                             f.repaint();
@@ -244,6 +266,22 @@ public class SceneFrame{
         };
         Timer timer = new Timer(50, TimedAction);
         timer.start();
+
+        ActionListener Twinkle = new ActionListener(){
+            public static int i = 0;
+            public void actionPerformed(ActionEvent ae){
+                i++;
+
+                if(i%2 == 1){
+                    sceneComponent.getStars().changeColor(new Color(180, 216, 246, 50));
+                }
+                else{
+                    sceneComponent.getStars().changeColor(new Color(180, 216, 246, 0));
+                }
+            }
+        };
+        Timer colors = new Timer(500, Twinkle);
+        colors.start();
     }
 
     public void setUpListener(){
@@ -303,6 +341,51 @@ public class SceneFrame{
             }
         };
         panel.addComponentListener(HomeFrameListener);
+
+        KeyListener keyCommands = new KeyListener(){
+            @Override
+
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() == 68){
+                    sceneComponent.getSun().changeY(panel.getHeight());
+                    sceneComponent.getMoon().changeY(panel.getHeight());
+                    don = 0;
+                    current = 0;
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 78){
+                    sceneComponent.getSun().changeY(panel.getHeight());
+                    sceneComponent.getMoon().changeY(panel.getHeight());
+                    don = 1;
+                    current = 0;
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 83){
+                    sceneComponent.getStars().drawStars();
+                    f.repaint();
+                }
+                else if(e.getKeyCode() == 66){
+                    sceneComponent.getShelf().drawBooksInShelves();
+                    f.repaint();
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+
+        f.addKeyListener(keyCommands);
+        moveMatR.addKeyListener(keyCommands);
+        moveMatL.addKeyListener(keyCommands);
+        pauseOrPlay.addKeyListener(keyCommands);
+        nextTrack.addKeyListener(keyCommands);
+        lastTrack.addKeyListener(keyCommands);
     }
     
 }
