@@ -4,9 +4,16 @@ import javax.swing.*;
 
 public class Bg implements DrawingObject{
     double w, h;
+    Color wallC, wallCS, floorC, floorCS;
+    
     public Bg(double w, double h){
         this.w = w;
         this.h = h;
+
+        wallC = Color.decode("#ffe495");
+        wallCS = Color.decode("#e9d188");
+        floorC = Color.decode("#5f2e10");
+        floorCS = Color.decode("#4a240d");
     }
 
     public void draw(Graphics2D g2d){
@@ -20,7 +27,7 @@ public class Bg implements DrawingObject{
             bg.lineTo(bgx[a], bgy[a]);
         }
         bg.closePath();
-        g2d.setColor(Color.decode("#ffe495"));
+        g2d.setColor(wallC);
         g2d.fill(bg);
 
         //bg shadow
@@ -33,12 +40,12 @@ public class Bg implements DrawingObject{
             bgS.lineTo(bgSx[a], bgSy[a]);
         }
         bgS.closePath();
-        g2d.setColor(Color.decode("#e9d188"));
+        g2d.setColor(wallCS);
         g2d.fill(bgS);
 
         //floor
         Rectangle2D.Double floor = new Rectangle2D.Double(0, h*0.75, w, h);
-        g2d.setColor(Color.decode("#5f2e10"));
+        g2d.setColor(floorC);
         g2d.fill(floor);
 
         //shelf to floor shadow
@@ -51,7 +58,14 @@ public class Bg implements DrawingObject{
             fS.lineTo(fSx[a], fSy[a]);
         }
         fS.closePath();
-        g2d.setColor(Color.decode("#4a240d"));
+        g2d.setColor(floorCS);
         g2d.fill(fS);
+    }
+
+    public void changeColor(Color w, Color wS, Color f, Color fS){
+        wallC = w;
+        wallCS = wS;
+        floorC = f;
+        floorCS = fS;
     }
 }
