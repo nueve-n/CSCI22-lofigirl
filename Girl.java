@@ -1,3 +1,8 @@
+//https://codingtechroom.com/question/-affine-transform-scale-center-java
+//https://codingtechroom.com/question/java-graphics2d-translate-scale
+//https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
+
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -8,6 +13,8 @@ public class Girl implements DrawingObject {
     static double baseY = 35;
     double x, y, w, h;
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
+    double breathPhase = 0;
+    double breathSpeed = 0.08;
 
     public Girl(
         double x, double y, double w, double h, 
@@ -72,7 +79,7 @@ public class Girl implements DrawingObject {
         sweater.moveTo(219.5, 318.5);
         sweater.quadTo(-92.7, 558.4, 67.9, 962.6);
         sweater.quadTo(218.2, 931.4, 350.7, 801.8);
-        sweater.quadTo(294.8, 767.2, 297.7, 378.7);
+        sweater.quadTo(294.8, 767.2, 310.7, 378.7);
         sweater.closePath();
 
         Path2D.Double pants1 = new Path2D.Double();
@@ -151,8 +158,22 @@ public class Girl implements DrawingObject {
         g2d.setColor(pants1C);
         g2d.fill(at.createTransformedShape(pants1));
         
+        double wave = (Math.sin(breathPhase) + 1) / 2;
+        double breatheY = 1 + 0.012 * wave;
+        double breatheX = 1 + 0.02 * wave;
+        double breatheShift = -18 * wave;
+
+        AffineTransform sweaterAT = new AffineTransform(at);
+
+        sweaterAT.translate(0, 600);
+
+        sweaterAT.scale(breatheX, breatheY);
+        sweaterAT.translate(0, breatheShift);
+
+        sweaterAT.translate(0, -600);
+
         g2d.setColor(sweaterC);
-        g2d.fill(at.createTransformedShape(sweater));
+        g2d.fill(sweaterAT.createTransformedShape(sweater));
 
         g2d.setColor(hairC);
         g2d.fill(at.createTransformedShape(hair));
@@ -178,5 +199,9 @@ public class Girl implements DrawingObject {
 
         g2d.setColor(sweaterC);
         g2d.fill(at.createTransformedShape(hairtie));
+    }
+
+    public void breathe() {
+        breathPhase += breathSpeed;
     }
 }

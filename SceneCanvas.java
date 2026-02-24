@@ -21,6 +21,7 @@ public class SceneCanvas extends JComponent{
     Girl girl;
     Lamp lamp;
     StudyLamp studyLamp;
+    StuffedToy stuffedToy;
 
     public SceneCanvas(double width, double height){
         w = width;
@@ -39,6 +40,7 @@ public class SceneCanvas extends JComponent{
         stars = new Stars(w*0.5, h*0.1, w*0.40, h*0.5);
         lamp = new Lamp(w*0.02, h*0.375, w*0.1, h*0.4);
         studyLamp = new StudyLamp(w*0.5 + w*0.25, h*0.4, w*0.2, h*0.45);
+        stuffedToy = new StuffedToy(w*0.69, h*0.608, w*0.12, h*0.18, Color.decode("#62343a"), Color.decode("#592a2c"), Color.decode("#74454a"));
 
         // public Girl(
         // double x, double y, double w, 
@@ -74,9 +76,9 @@ public class SceneCanvas extends JComponent{
         objects.add(chair);
         objects.add(girl);
         objects.add(table);
+        objects.add(stuffedToy);
         objects.add(lamp);
         objects.add(studyLamp);
-
 
         setPreferredSize(new Dimension(800, 600));
     }
@@ -124,5 +126,13 @@ public class SceneCanvas extends JComponent{
 
     public Lamp getLamp(){
         return lamp;
+    }
+
+    public Girl getGirl(){
+        return girl;
+    }
+
+    public StudyLamp getStudyLamp() {
+        return studyLamp;
     }
 }

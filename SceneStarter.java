@@ -13,9 +13,10 @@ public class SceneStarter{
         hf.setUpListener();
 
         System.out.println("Welcome to Lofi Girl Radio");
-        System.out.println("Press d to change time to day");
-        System.out.println("Press n to change time to night");
-        System.out.println("Press s to change time to randomize stars");
-        System.out.println("Press b to change time to randomize books");
+        System.out.println("Press [D] to change time to day");
+        System.out.println("Press [N] to change time to night");
+        System.out.println("Press [S] to randomize stars");
+        System.out.println("Press [B] to randomize books");
+        System.out.println("Press [L] to turn the lamp on/off");
     }
 }

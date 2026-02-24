@@ -158,6 +158,9 @@ public class SceneFrame{
         ActionListener TimedAction = new ActionListener(){
             @Override 
             public void actionPerformed(ActionEvent ae){
+                sceneComponent.getGirl().breathe();
+                sceneComponent.repaint();
+
                 double sunYU = sceneComponent.getSun().getYU();
                 double sunYD = sceneComponent.getSun().getYD();
 
@@ -366,6 +369,10 @@ public class SceneFrame{
                 }
                 else if(e.getKeyCode() == 66){
                     sceneComponent.getShelf().drawBooksInShelves();
+                    f.repaint();
+                }
+                else if (e.getKeyCode() == 76){
+                    sceneComponent.getStudyLamp().toggle();
                     f.repaint();
                 }
 
