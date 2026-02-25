@@ -1,3 +1,5 @@
+//Coordinate tracing tool for shapes by Marxus Magisa
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -7,12 +9,18 @@ public class Laptop implements DrawingObject {
     static double baseY = 131.6;
     static double baseWidth  = 290.5;
     static double baseHeight = 251.0;
+    Color frameC, screenC, baseC, widthC, keyboardC;
 
-    public Laptop(double x, double y, double w, double h) {
+    public Laptop(double x, double y, double w, double h, Color frameC, Color screenC, Color baseC, Color widthC, Color keyboardC) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.frameC = frameC;
+        this.screenC = screenC;
+        this.baseC = baseC;
+        this.widthC = widthC;
+        this.keyboardC = keyboardC;
     }
 
     @Override 
@@ -58,19 +66,19 @@ public class Laptop implements DrawingObject {
         at.scale(w/baseWidth, h/baseHeight);
         at.translate(-baseX, -baseY);
 
-        g2d.setColor(Color.decode("#6a4c38"));
+        g2d.setColor(frameC);
         g2d.fill(at.createTransformedShape(frame));
 
-        g2d.setColor(Color.decode("#cba19a"));
+        g2d.setColor(screenC);
         g2d.fill(at.createTransformedShape(screen));
         
-        g2d.setColor(Color.decode("#986443"));
+        g2d.setColor(baseC);
         g2d.fill(at.createTransformedShape(base));
         
-        g2d.setColor(Color.decode("#674622"));
+        g2d.setColor(widthC);
         g2d.fill(at.createTransformedShape(width));
         
-        g2d.setColor(Color.decode("#78593f"));
+        g2d.setColor(keyboardC);
         g2d.fill(at.createTransformedShape(keyboard));       
     }
 }

@@ -31,8 +31,7 @@ public class SceneFrame{
         don = 0;
         current = 0;
         f = new JFrame();
-        f.pack();
-
+        
         panel = new JPanel(new BorderLayout());
         panelS = new JPanel(new GridLayout(0,4));
         matPanel = new JPanel(new GridLayout(0,2));
@@ -47,14 +46,15 @@ public class SceneFrame{
         pauseOrPlay = new JButton("⏸️");
         nextTrack = new JButton("⏭️");
         
+        f.pack();
     }
 
-    public void setUp(){
+    public void setUpGUI(){
         f.setSize(w,h);
         f.setFocusable(true);
         w = f.getWidth();
         h = f.getHeight();
-        f.setTitle("LofiGirl_MacalalalagxRanario");
+        f.setTitle("Midterm Project - Macalalag - Ranario");
         f.add(panel);
         f.add(panelS, BorderLayout.SOUTH);
 

@@ -4,7 +4,7 @@ public class SceneStarter{
         int h = 600;
         
         SceneFrame hf = new SceneFrame(w, h);
-        hf.setUp();
+        hf.setUpGUI();
         hf.setUpTimer();
         hf.setUpMusic();
         hf.setUpListener();
