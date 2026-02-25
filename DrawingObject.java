@@ -2,7 +2,4 @@ import java.awt.*;
 
 public interface DrawingObject {
     void draw(Graphics2D g2d); // for drawing the object
-/*     void adjustX(double distance);
-    double getX(); */
-
 }

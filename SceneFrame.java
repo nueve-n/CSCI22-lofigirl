@@ -31,8 +31,6 @@ public class SceneFrame{
         don = 0;
         current = 0;
         f = new JFrame();
-        f.pack();
-
         panel = new JPanel(new BorderLayout());
         panelS = new JPanel(new GridLayout(0,4));
         matPanel = new JPanel(new GridLayout(0,2));
@@ -50,10 +48,7 @@ public class SceneFrame{
     }
 
     public void setUp(){
-        f.setSize(w,h);
         f.setFocusable(true);
-        w = f.getWidth();
-        h = f.getHeight();
         f.setTitle("LofiGirl_MacalalalagxRanario");
         f.add(panel);
         f.add(panelS, BorderLayout.SOUTH);
@@ -68,6 +63,10 @@ public class SceneFrame{
         matPanel.add(moveMatL);
         matPanel.add(moveMatR);
 
+        f.pack();
+        w = f.getWidth();
+        h = f.getHeight();
+        
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }

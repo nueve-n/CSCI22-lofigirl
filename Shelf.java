@@ -75,8 +75,8 @@ public class Shelf implements DrawingObject{
             }
             bookCi = bookC;
 
-            if(shelfW - currentW > shelfW*0.15){
-                double bookW = (double)(Math.random() * (shelfW*(0.15) - shelfW*(0.03))) + shelfW*(0.03);
+            if(shelfW - currentW > shelfW*(0.1)*2){
+                double bookW = (double)(Math.random() * (shelfW*(0.15) - shelfW*(0.1))) + shelfW*(0.1);
 
                 Rectangle book = new Rectangle(x + w*0.05 + currentW, bookH, bookW, minH - bookH, bookCA[bookC]);
                 books.add(book);
