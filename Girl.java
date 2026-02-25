@@ -14,7 +14,7 @@ public class Girl implements DrawingObject {
     double x, y, w, h;
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
     double breathPhase = 0;
-    double breathSpeed = 0.08;
+    double breathSpeed = 0.09;
 
     public Girl(
         double x, double y, double w, double h, 
@@ -158,10 +158,10 @@ public class Girl implements DrawingObject {
         g2d.setColor(pants1C);
         g2d.fill(at.createTransformedShape(pants1));
         
-        double wave = (Math.sin(breathPhase) + 1) / 2;
-        double breatheY = 1 + 0.012 * wave;
-        double breatheX = 1 + 0.02 * wave;
-        double breatheShift = -18 * wave;
+        double multiplier = (Math.sin(breathPhase) + 1) / 2;
+        double breatheY = 1 + 0.012 * multiplier;
+        double breatheX = 1 + 0.02 * multiplier;
+        double breatheShift = -18 * multiplier;
 
         AffineTransform sweaterAT = new AffineTransform(at);
 

@@ -22,6 +22,8 @@ public class SceneCanvas extends JComponent{
     Lamp lamp;
     StudyLamp studyLamp;
     StuffedToy stuffedToy;
+    GirlArms girlArms;
+    Laptop laptop;
 
     public SceneCanvas(double width, double height){
         w = width;
@@ -32,6 +34,7 @@ public class SceneCanvas extends JComponent{
         mat = new Mat(w*0.125*0.5, h*0.8, w*0.25 + w*0.125, h * 0.1, Color.decode("#584528"), Color.decode("#977b50"));
         chair = new Chair(w*0.43, h*0.56, w*0.14, h * 0.30, Color.decode("#d6827d"), Color.decode("#b25b4e"), Color.decode("#2c2c2c"));
         table = new Table(w*0.50, h*0.60, w*0.35, h * 0.15, Color.decode("#50312f"), Color.decode("#392421"), Color.decode("#2c2020"));
+        laptop = new Laptop(w*0.608, h*0.49, w*0.12, h*0.18);
         tableFeet = new TableBackFeet(w*0.50, h*0.60, w*0.35, h * 0.15, Color.decode("#231818"));
         sun = new Celestial(w*0.5 + w*0.13, h*0.75, w*0.1, Color.decode("#ebb000"), Color.decode("#e3bf55"), Color.decode("#dcc376"), Color.decode("#d9c58a"));
         moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
@@ -62,6 +65,7 @@ public class SceneCanvas extends JComponent{
             Color.decode("#a05884"),
             Color.decode("#170e11")
         );
+        girlArms = new GirlArms(w * 0.475, h * 0.44, w * 0.16, h * 0.45, Color.decode("#03352d"), Color.decode("#01221d"), Color.decode("#b2664d"), Color.decode("#a45341"));
 
         objects = new ArrayList<>();
 
@@ -76,6 +80,8 @@ public class SceneCanvas extends JComponent{
         objects.add(chair);
         objects.add(girl);
         objects.add(table);
+        objects.add(laptop);
+        objects.add(girlArms);
         objects.add(stuffedToy);
         objects.add(lamp);
         objects.add(studyLamp);
@@ -132,6 +138,9 @@ public class SceneCanvas extends JComponent{
         return girl;
     }
 
+    public GirlArms getGirlArms() {
+        return girlArms;
+    }
     public StudyLamp getStudyLamp() {
         return studyLamp;
     }
