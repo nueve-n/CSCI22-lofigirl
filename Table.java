@@ -1,9 +1,40 @@
+/**
+    The Table class represents a table in the scene. 
+    It utilizes a combination of the quadrilateral class and rectangle class to render the table top and supporting legs.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 import java.awt.*;
 
 public class Table implements DrawingObject {
     private double x, y, w, h;
     private Color light, shadow1, shadow2;
 
+    /**
+        Constructs a Table with specific position, size, and color palette.
+        @param x The x-coordinate of the table.
+        @param y The y-coordinate of the table.
+        @param w The width of the table.
+        @param h The height of the table.
+        @param light The color used for the tabletop surface.
+        @param shadow1 The primary shadow color for the table's thickness.
+        @param shadow2 The secondary shadow color for the table legs.
+    */
     public Table (double x, double y, double w, double h, Color light, Color shadow1, Color shadow2){
         this.x = x;
         this.y = y;
@@ -15,6 +46,11 @@ public class Table implements DrawingObject {
 
     }
 
+    /**
+        Renders the table by drawing the tabletop, thickness, and legs in a 
+        specific order to maintain the correct visual depth and perspective.
+        @param g2d The Graphics2D object used for drawing.
+    */
     @Override
     public void draw(Graphics2D g2d) {
         Quadrilateral tableTop = new Quadrilateral(

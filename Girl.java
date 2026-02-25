@@ -1,7 +1,23 @@
-//https://codingtechroom.com/question/-affine-transform-scale-center-java
-//https://codingtechroom.com/question/java-graphics2d-translate-scale
-//https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
+/**
+    The Girl class represents the lofi girl herself. 
+    It has the complex shapes for hair, clothing, and accessories, and includes logic for animations such as breathing and blinking.
 
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -11,11 +27,35 @@ public class Girl implements DrawingObject {
     static double baseHeight = 1291.3;
     static double baseX = 67.9;
     static double baseY = 35;
+
     double x, y, w, h;
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
-    double breathPhase = 0;
+    
+    double breathProgress = 0;
     double breathSpeed = 0.09;
+    
+    double eyeX = 401.8;
+    double eyeY = 238.9;
+    double blinkProgress = 0;
+    boolean isBlinking = false;
+    double blinkSpeed = 0.30;
 
+    /**
+        Constructs the Girl object with specific positions and a color palette.
+        @param x The x-coordinate for the character.
+        @param y The y-coordinate for the character.
+        @param w The width of the character.
+        @param h The height of the character.
+        @param skinC The color for skin tones.
+        @param socks2C Secondary color for socks.
+        @param socks1C Primary color for socks.
+        @param pants2C Secondary color for pants.
+        @param pants1C Primary color for pants.
+        @param sweaterC The color for the sweater.
+        @param hairC The color for hair, eyebrows, and eyes.
+        @param headphonesOuterC The color for the headphone frame.
+        @param headphonesInnerC The color for the headphone earcups.
+    */
     public Girl(
         double x, double y, double w, double h, 
         Color skinC, 
@@ -39,6 +79,11 @@ public class Girl implements DrawingObject {
         this.headphonesInnerC = headphonesInnerC;
     }
     
+    /**
+        Renders the character using AffineTransforms for scaling and breathing effects.
+        The method draws layers including the face, clothing, and eyes.
+        @param g2d The Graphics2D object used for rendering.
+    */
     @Override 
     public void draw(Graphics2D g2d) {
         Path2D.Double hair = new Path2D.Double();
@@ -123,12 +168,15 @@ public class Girl implements DrawingObject {
         eyebrow.quadTo(389.5, 215.2, 371.3, 222.1);
         eyebrow.closePath();
 
-        Line2D.Double eyelash = new Line2D.Double(
-            374.5, 236.3, 401.8, 238.9
-        );
-       
+        double currentEyeHeight = 20.0 * (1.0 - (blinkProgress * 0.95)); 
+        double eyeOffset = 10.0 * blinkProgress;
+
         Ellipse2D.Double eye = new Ellipse2D.Double(
-            384.6, 234.8, 15.0, 20.0
+            384.6, 234.8 + eyeOffset, 15.0, currentEyeHeight
+        );
+
+        Line2D.Double eyelash = new Line2D.Double(
+            374.5, 236.3 + (10 * blinkProgress), 401.8, 238.9 + (10 * blinkProgress)
         );
 
         Path2D.Double hairtie = new Path2D.Double();
@@ -158,7 +206,7 @@ public class Girl implements DrawingObject {
         g2d.setColor(pants1C);
         g2d.fill(at.createTransformedShape(pants1));
         
-        double multiplier = (Math.sin(breathPhase) + 1) / 2;
+        double multiplier = (Math.sin(breathProgress) + 1) / 2;
         double breatheY = 1 + 0.012 * multiplier;
         double breatheX = 1 + 0.02 * multiplier;
         double breatheShift = -18 * multiplier;
@@ -201,7 +249,47 @@ public class Girl implements DrawingObject {
         g2d.fill(at.createTransformedShape(hairtie));
     }
 
+    /**
+        Updates the breathing animation progress using a sine wave function.
+        This method is called within SceneFrame
+    */
     public void breathe() {
-        breathPhase += breathSpeed;
+        breathProgress += breathSpeed;
+    }
+
+    /**
+        Manages the blinking animation state.
+        This method is called within SceneFrame
+    */
+    public void blink() {
+        if (isBlinking) {
+            
+            blinkProgress += blinkSpeed;
+            
+            if (blinkProgress >= 1.0) {
+                blinkProgress = 1.0;
+                isBlinking = false;
+            }
+        } 
+
+        else if (blinkProgress > 0) {
+            blinkProgress -= blinkSpeed;
+            if (blinkProgress < 0) blinkProgress = 0;
+        }
+    }
+
+    /**
+        Initiates the blinking sequence.
+    */
+    public void startBlink() {
+        isBlinking = true;
     }
 }
+
+/**
+REFERENCES:
+    1. CodingTechRoom. "How to Scale a Shape from Its Center Using AffineTransform in Java." https://codingtechroom.com/question/-affine-transform-scale-center-java
+    2. CodingTechRoom. "How to Translate and Scale Graphics Using Java's Graphics2D?." https://codingtechroom.com/question/java-graphics2d-translate-scale
+    3. GeeksforGeeks. "Java Math sin() method with Examples." https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
+    4. Coordinate tracing tool for shapes created by Marxus Magisa.
+*/

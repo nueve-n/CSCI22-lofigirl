@@ -1,3 +1,24 @@
+/**
+    The Chair class represents a chair in the scene. 
+    It utilizes a combination of the quadrilateral class, rectangle shape, and  Java's rounded rectangles.    
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -5,8 +26,17 @@ public class Chair implements DrawingObject {
     private double x, y, w, h;
     private Color light, shadow1, shadow2;
 
-    public Chair(double x, double y, double w, double h,
-                 Color light, Color shadow1, Color shadow2) {
+    /**
+        Constructs a Chair with specific position, size, and color palette.
+        @param x The x-coordinate of the chair.
+        @param y The y-coordinate of the chair.
+        @param w The width of the chair.
+        @param h The height of the chair.
+        @param light The color used for the highlighted surfaces.
+        @param shadow1 The primary shadow color for the backrest and supports.
+        @param shadow2 The secondary shadow color for the chair legs.
+    */
+    public Chair(double x, double y, double w, double h, Color light, Color shadow1, Color shadow2) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -16,11 +46,14 @@ public class Chair implements DrawingObject {
         this.shadow2 = shadow2;
     }
 
+    /**
+        Renders the chair by drawing the backrest, seat, and legs in a specific 
+        order to maintain the correct visual depth and perspective.
+        @param g2d The Graphics2D object used for drawing.
+    */
     @Override
     public void draw(Graphics2D g2d) {
 
-        // Rectangle hitbox = new Rectangle(x, y, w, h, Color.WHITE);
-        // hitbox.draw(g2d);
         Quadrilateral backrest = new Quadrilateral(
             x + w * 0.075, y,
             x + w * 0.3, y - h * 0.05,
@@ -56,19 +89,35 @@ public class Chair implements DrawingObject {
         );
 
         Rectangle support = new Rectangle(
-            x + w * 0.075, y + h * 0.75, w * 0.825, h * 0.1, shadow1
+            x + w * 0.075, 
+            y + h * 0.75, 
+            w * 0.825, 
+            h * 0.1, 
+            shadow1
         );
 
         Rectangle foot1 = new Rectangle(
-            x + w * 0.075, y + h * 0.85, w * 0.12, h * 0.30, shadow2
+            x + w * 0.075, 
+            y + h * 0.85, 
+            w * 0.12, 
+            h * 0.30, 
+            shadow2
         );
 
         Rectangle foot2 = new Rectangle(
-            x + w * 0.73, y + h * 0.85, w * 0.12, h * 0.30, shadow2
+            x + w * 0.73, 
+            y + h * 0.85, 
+            w * 0.12, 
+            h * 0.30, 
+            shadow2
         );
 
         Rectangle foot3 = new Rectangle(
-            x + w * 0.3, y + h * 0.65, w * 0.115, h * 0.28, shadow2
+            x + w * 0.3, 
+            y + h * 0.65, 
+            w * 0.115, 
+            h * 0.28, 
+            shadow2
         );
         
         foot3.draw(g2d);

@@ -1,3 +1,24 @@
+/**
+    The StuffedToy class represents a stuffed toy on the table. 
+    It uses Path2D shapes and an AffineTransform to render the shapes.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -9,6 +30,16 @@ public class StuffedToy implements DrawingObject {
     double x, y, w, h;
     Color bodyC, earC, tummyC;
 
+    /**
+        Constructs a StuffedToy with specified positions, and color palette.
+        @param x The x-coordinate of the toy.
+        @param y The y-coordinate of the toy.
+        @param w The width to scale the toy to.
+        @param h The height to scale the toy to.
+        @param bodyC The color of the toy's body.
+        @param earC The color of the inner ears and nose.
+        @param tummyC The color of the tummy area.
+    */
     public StuffedToy(double  x, double y, double w, double h, Color bodyC, Color earC, Color tummyC) {
         this.x = x;
         this.y = y;
@@ -19,6 +50,10 @@ public class StuffedToy implements DrawingObject {
         this.tummyC = tummyC;
     }
     
+    /**
+        Renders the stuffed toy elements using an AffineTransform for scaling.
+        @param g2d The Graphics2D object used for rendering.
+    */
     @Override 
     public void draw(Graphics2D g2d) {
 
@@ -127,3 +162,10 @@ public class StuffedToy implements DrawingObject {
         g2d.fill(at.createTransformedShape(nose));
     }
 }
+
+/**
+REFERENCES:
+    1. CodingTechRoom. "How to Scale a Shape from Its Center Using AffineTransform in Java." https://codingtechroom.com/question/-affine-transform-scale-center-java
+    2. CodingTechRoom. "How to Translate and Scale Graphics Using Java's Graphics2D?." https://codingtechroom.com/question/java-graphics2d-translate-scale
+    3. Coordinate tracing tool for shapes created by Marxus Magisa.
+*/

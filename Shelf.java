@@ -1,8 +1,26 @@
-//https://www.geeksforgeeks.org/java/java-math-random-method-examples/
+/**
+    The Shelf class represents a bookshelf in the scene.
+    It generates a random set of books. 
+    It calculates random heights, widths, and colors for each book to fill the shelves dynamically.
 
-import javax.swing.*;
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 import java.awt.*;
-import java.awt.geom.*;
 import java.util.*;
 
 public class Shelf implements DrawingObject{
@@ -12,6 +30,15 @@ public class Shelf implements DrawingObject{
     ArrayList<Rectangle> stripes;
     ArrayList<Ellipse> tags;
 
+    /**
+        Constructs a Shelf with specified positions, dimensions, and color palette.
+        @param x The x-coordinate of the shelf.
+        @param y The y-coordinate of the shelf.
+        @param w The width of the shelf.
+        @param h The total height of the shelf.
+        @param co The outer frame color.
+        @param ci The inner background color.
+    */
     public Shelf(double x, double y, double w, double h, Color co, Color ci){
         this.x = x;
         this.y = y;
@@ -25,6 +52,10 @@ public class Shelf implements DrawingObject{
         tags = new ArrayList<Ellipse>();
     }
 
+    /**
+        Renders the shelf frame and all randomly generated books.
+        @param g2d The Graphics2D object used for rendering.
+    */
     public void draw(Graphics2D g2d){
         Rectangle outer = new Rectangle(x, y, w, h, co);
         outer.draw(g2d);
@@ -48,6 +79,10 @@ public class Shelf implements DrawingObject{
         }
     }
 
+    /**
+        Triggers the generation of books for all three shelf levels.
+        Resets existing book lists before generating new ones.
+    */
     public void drawBooksInShelves(){
         books = new ArrayList<Rectangle>();
         stripes = new ArrayList<Rectangle>();
@@ -60,6 +95,14 @@ public class Shelf implements DrawingObject{
         //shelf3
         drawBooks((y + h * 0.05 + h * 0.9) - ((y + h * 0.66 - h * 0.05) + h *0.05), (y + h * 0.66 - h * 0.05) + h *0.05, y + h * 0.05 + h * 0.9);
     }
+
+    /**
+        Fills a specific shelf range with books.
+        Uses random values to determine book dimensions.
+        @param rangeH The available vertical range for book height.
+        @param maxH The highest point (top) the books can reach.
+        @param minH The lowest point (bottom) the books sit on.
+    */
     public void drawBooks(double rangeH, double maxH, double minH){
         double shelfW = w * 0.9;
         Color[] bookCA = {Color.decode("#6b0a0a"), Color.decode("#0d6b0a"), Color.decode("#1f174b"), Color.decode("#6e370b")};
@@ -105,3 +148,8 @@ public class Shelf implements DrawingObject{
         }
     }
 }
+
+/*
+REFERENCES:
+    1. GeeksforGeeks. "Java.math.random() method with Examples." https://www.geeksforgeeks.org/java/java-math-random-method-examples/
+*/
