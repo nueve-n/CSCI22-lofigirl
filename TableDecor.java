@@ -1,4 +1,24 @@
-//Coordinate tracing tool for shapes by Marxus Magisa
+/**
+    The TableDecor class represents various items on the table, including
+    stacked books, loose papers, and a mobile phone. It uses Path2D shapes 
+    and an AffineTransform to render these detailed elements.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -11,6 +31,25 @@ public class TableDecor implements DrawingObject {
     static double baseHeight = 184.0;
     Color pagesC, pagesShadowC, book1C, book1ShadowC, book2C, book3C, book4C, book4ShadowC, book5C, book5ShadowC, phoneC, phoneShadowC;
 
+    /**
+        Constructs TableDecor with specified positions and a detailed color palette for the items.
+        @param x The x-coordinate of the decorations.
+        @param y The y-coordinate of the decorations.
+        @param w The width to scale the decorations to.
+        @param h The height to scale the decorations to.
+        @param pagesC The color for book pages and paper.
+        @param pagesShadowC The shadow color for paper.
+        @param book1C Primary color for the first book.
+        @param book1ShadowC Shadow color for the first book.
+        @param book2C Color for the second book.
+        @param book3C Color for the third book.
+        @param book4C Color for the fourth book.
+        @param book4ShadowC Shadow color for the fourth book.
+        @param book5C Color for the fifth book.
+        @param book5ShadowC Shadow color for the fifth book.
+        @param phoneC Primary color for the phone.
+        @param phoneShadowC Shadow color for the phone side.
+    */
     public TableDecor(
             double x, double y, double w, double h,
             Color pagesC, Color pagesShadowC,
@@ -40,6 +79,10 @@ public class TableDecor implements DrawingObject {
         this.phoneShadowC = phoneShadowC;
     }
 
+    /**
+        Renders the table decorations using an AffineTransform for scaling and positioning.
+        @param g2d The Graphics2D object used for rendering.
+    */
     @Override 
     public void draw(Graphics2D g2d) {
 
@@ -262,3 +305,10 @@ public class TableDecor implements DrawingObject {
         g2d.fill(at.createTransformedShape(phoneTop));
     }
 }
+
+/**
+REFERENCES:
+    1. CodingTechRoom. "How to Scale a Shape from Its Center Using AffineTransform in Java." https://codingtechroom.com/question/-affine-transform-scale-center-java
+    2. CodingTechRoom. "How to Translate and Scale Graphics Using Java's Graphics2D?." https://codingtechroom.com/question/java-graphics2d-translate-scale
+    3. Coordinate tracing tool for shapes created by Marxus Magisa.
+*/

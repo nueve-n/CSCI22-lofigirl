@@ -1,8 +1,23 @@
-//https://codingtechroom.com/question/-affine-transform-scale-center-java
-//https://codingtechroom.com/question/java-graphics2d-translate-scale
-//https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
-//https://www.javathinking.com/blog/rotating-image-with-affinetransform/
+/**
+    The GirlArms class manages the rendering and animation of the girl's arms and hands.
+    It implements AffineTransform logic to make arm movements synced with the character's breathing while simulating typing motion.
 
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -14,11 +29,22 @@ public class GirlArms implements DrawingObject {
     static double baseY = 35;
     double x, y, w, h;
     Color sweaterC, sweaterShadowC, skinC, skinShadowC;
-    double breathPhase = 0;
+    double breathProgress = 0;
     double breathSpeed = 0.09;
-    double typingPhase = 0;
+    double typingProgress = 0;
     double typingSpeed = 1;
 
+    /**
+        Constructs the GirlArms object with specified positions and a color palette.
+        @param x The x-coordinate for the arms.
+        @param y The y-coordinate for the arms.
+        @param w The width of the arms component.
+        @param h The height of the arms component.
+        @param sweaterC The main color of the sweater sleeves.
+        @param sweaterShadowC The color for the shadowed parts of the sleeves.
+        @param skinC The main skin color for the hands.
+        @param skinShadowC The shadow color for the hands.
+    */
     public GirlArms(
         double x, double y, double w, double h, 
         Color sweaterC, Color sweaterShadowC, Color skinC, Color skinShadowC) {
@@ -32,6 +58,11 @@ public class GirlArms implements DrawingObject {
         this.skinShadowC = skinShadowC;
     }
     
+    /**
+        Renders the arms and hands using stacked AffineTransforms.
+        It handles the translation for breathing and the rotation for the typing animation.
+        @param g2d The Graphics2D object used for drawing.
+    */
     @Override 
     public void draw(Graphics2D g2d) {
         Path2D.Double sleeveUpper1 = new Path2D.Double();
@@ -86,7 +117,7 @@ public class GirlArms implements DrawingObject {
         at.scale(w/baseWidth, h/baseHeight);
         at.translate(-baseX, -baseY);
 
-        double breathMultiplier = (Math.sin(breathPhase) + 1) / 2;
+        double breathMultiplier = (Math.sin(breathProgress) + 1) / 2;
         double breatheShift = -18 * breathMultiplier;
 
         AffineTransform sweaterSleeveAT = new AffineTransform(at);
@@ -95,7 +126,7 @@ public class GirlArms implements DrawingObject {
         sweaterSleeveAT.translate(0, breatheShift * 0.75);        
         sweaterSleeveAT.translate(0, -600);
 
-        double typingMultiplier = Math.sin(typingPhase);
+        double typingMultiplier = Math.sin(typingProgress);
 
         AffineTransform typingRightAT = new AffineTransform(sweaterSleeveAT);
 
@@ -122,8 +153,21 @@ public class GirlArms implements DrawingObject {
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveLower1));
     }
 
+    /**
+        Updates the progress for breathing and typing animations.
+        This method is called within SceneFrame.
+    */
     public void animate() {
-        breathPhase += breathSpeed;
-        typingPhase += typingSpeed;
+        breathProgress += breathSpeed;
+        typingProgress += typingSpeed;
     }
 }
+
+/*
+REFERENCES:
+    1. CodingTechRoom. "Affine Transform Scale Center Java." https://codingtechroom.com/question/-affine-transform-scale-center-java
+    2. CodingTechRoom. "Java Graphics2D Translate Scale." https://codingtechroom.com/question/java-graphics2d-translate-scale
+    3. GeeksforGeeks. "Java Math sin() method with Examples." https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
+    4. JavaThinking. "Rotating Image with AffineTransform." https://www.javathinking.com/blog/rotating-image-with-affinetransform/
+    5. Coordinate tracing tool for shapes created by Marxus Magisa.
+*/

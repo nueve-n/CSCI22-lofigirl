@@ -1,4 +1,23 @@
-//https://stackoverflow.com/questions/34688182/java-graphics2d-draw-an-image-with-gradient-opacity
+/**
+    The StudyLamp class represents a standing lamp beside the table.
+    It features a light beam rendered with a gradient and a toggle function to turn the light on and off.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -7,6 +26,13 @@ public class StudyLamp implements DrawingObject{
     double x, y, w, h;
     boolean isOn = true;
 
+    /**
+        Constructs a StudyLamp with a specific position and size.
+        @param x The x-coordinate of the lamp.
+        @param y The y-coordinate of the lamp.
+        @param w The width of the lamp.
+        @param h The height of the lamp.
+    */
     public StudyLamp(double x, double y, double w, double h){
         this.x = x;
         this.y = y;
@@ -14,6 +40,11 @@ public class StudyLamp implements DrawingObject{
         this.h = h;
     }
 
+    /**
+        Renders the lamp base, stand, and head. It also draws a 
+        gradient light beam if the lamp is turned on.
+        @param g2d The Graphics2D object used for rendering.
+    */
     public void draw(Graphics2D g2d){
         AffineTransform originalTransform = g2d.getTransform();
         
@@ -72,10 +103,9 @@ public class StudyLamp implements DrawingObject{
         g2d.setTransform(originalTransform);
     }
 
-    public void flicker() {
-
-    }
-
+    /**
+        Toggles lamp between on and off.
+    */
     public void toggle() {
         isOn = !isOn;
     }

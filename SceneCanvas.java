@@ -1,3 +1,25 @@
+/**
+    The SceneCanvas class acts as the drawing board for the application. 
+    It has a collection of DrawingObject instances and manages their 
+    instantiation, ordering, and rendering process within the GUI.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -25,6 +47,12 @@ public class SceneCanvas extends JComponent{
     Laptop laptop;
     TableDecor tableDecor;
 
+    /**
+        Constructs the SceneCanvas and initializes all graphical objects.
+        It sets the initial positions, dimensions, and colors for every element in the scene and populates the drawing list.
+        @param width Used for proportions.
+        @param height Used for proportions.
+    */
     public SceneCanvas(double width, double height){
         w = width;
         h = height;
@@ -71,6 +99,11 @@ public class SceneCanvas extends JComponent{
         setPreferredSize(new Dimension(800, 600));
     }
 
+    /**
+        Handles the rendering of the component.
+        It enables antialiasing and iterates through the object list to draw each element.
+        @param g The Graphics object used for drawing.
+     */
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
@@ -84,46 +117,69 @@ public class SceneCanvas extends JComponent{
         }
     }
 
-    public Mat getMat(){
-        return mat;
-    }
+    /**
+        Returns the mat object.
+        @return The Mat instance.
+    */
+    public Mat getMat() { return mat; }
 
-    public Shelf getShelf(){
-        return shelf;
-    }
+    /**
+        Returns the shelf object.
+        @return The Shelf instance.
+    */
+    public Shelf getShelf() { return shelf; }
 
-    public Celestial getSun(){
-        return sun;
-    }
+    /**
+        Returns the sun celestial object.
+        @return The Celestial instance for the sun.
+    */
+    public Celestial getSun() { return sun; }
 
-    public Celestial getMoon(){
-        return moon;
-    }
+    /**
+        Returns the moon celestial object.
+        @return The Celestial instance for the moon.
+    */
+    public Celestial getMoon() { return moon; }
 
-    public Sky getOutside(){
-        return outside;
-    }
+    /**
+        Returns the outside sky object.
+        @return The Sky instance.
+    */
+    public Sky getOutside() { return outside; }
 
-    public Stars getStars(){
-        return stars;
-    }
+    /**
+        Returns the stars object.
+        @return The Stars instance.
+    */
+    public Stars getStars() { return stars; }
 
-    public Background getBG(){
-        return background;
-    }
+    /**
+        Returns the background object.
+        @return The Background instance.
+    */
+    public Background getBG() { return background; }
 
-    public Lamp getLamp(){
-        return lamp;
-    }
+    /**
+        Returns the lamp object.
+        @return The Lamp instance.
+     */
+    public Lamp getLamp() { return lamp; }
 
-    public Girl getGirl(){
-        return girl;
-    }
+    /**
+        Returns the girl character object.
+        @return The Girl instance.
+     */
+    public Girl getGirl() { return girl; }
 
-    public GirlArms getGirlArms() {
-        return girlArms;
-    }
-    public StudyLamp getStudyLamp() {
-        return studyLamp;
-    }
+    /**
+        Returns the girl's arms object.
+        @return The GirlArms instance.
+     */
+    public GirlArms getGirlArms() { return girlArms; }
+
+    /**
+        Returns the study lamp object.
+        @return The StudyLamp instance.
+     */
+    public StudyLamp getStudyLamp() { return studyLamp; }
 }

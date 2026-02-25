@@ -1,4 +1,23 @@
-//Coordinate tracing tool for shapes by Marxus Magisa
+/**
+    The Laptop class represents a laptop in the scene. 
+    It uses Path2D shapes and an AffineTransform to render the shapes.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -11,6 +30,18 @@ public class Laptop implements DrawingObject {
     static double baseHeight = 251.0;
     Color frameC, screenC, baseC, widthC, keyboardC;
 
+    /**
+        Constructs a Laptop with specified positions, and color palette.
+        @param x The x-coordinate of the laptop.
+        @param y The y-coordinate of the laptop.
+        @param w The width to scale the laptop to.
+        @param h The height to scale the laptop to.
+        @param frameC The color of the laptop screen frame.
+        @param screenC The color of the laptop screen.
+        @param baseC The color of the top surface of the laptop base.
+        @param widthC The color of the side/thickness of the laptop base.
+        @param keyboardC The color of the keyboard area.
+    */
     public Laptop(double x, double y, double w, double h, Color frameC, Color screenC, Color baseC, Color widthC, Color keyboardC) {
         this.x = x;
         this.y = y;
@@ -23,6 +54,10 @@ public class Laptop implements DrawingObject {
         this.keyboardC = keyboardC;
     }
 
+    /**
+        Renders the laptop elements using an AffineTransform for scaling.
+        @param g2d The Graphics2D object used for rendering.
+    */
     @Override 
     public void draw(Graphics2D g2d) {
         Path2D.Double frame = new Path2D.Double();
@@ -82,3 +117,10 @@ public class Laptop implements DrawingObject {
         g2d.fill(at.createTransformedShape(keyboard));       
     }
 }
+
+/**
+REFERENCES:
+    1. CodingTechRoom. "How to Scale a Shape from Its Center Using AffineTransform in Java." https://codingtechroom.com/question/-affine-transform-scale-center-java
+    2. CodingTechRoom. "How to Translate and Scale Graphics Using Java's Graphics2D?." https://codingtechroom.com/question/java-graphics2d-translate-scale
+    3. Coordinate tracing tool for shapes created by Marxus Magisa.
+*/

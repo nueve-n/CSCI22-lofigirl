@@ -1,3 +1,24 @@
+/**
+    The SceneFrame class manages the primary window and the arrangement and animation of the application's moving elements. 
+    It is responsible for initializing the GUI layout, coordinating the animation timers, managing the music player system, and handling all user input via listeners.
+
+    @author Fiona Nadine Macalalag (253550)
+    @author John Carlo Ranario (254815)
+    @version February 26, 2026
+
+    We have not discussed the Java language code in my program
+    with anyone other than our instructor or the teaching assistants
+    assigned to this course.
+
+    We have not used Java language code obtained from another student,
+    or any other unauthorized source, either modified or unmodified.
+    
+    If any Java language code or documentation used in our program
+    was obtained from another source, such as a textbook or website,
+    that has been clearly noted with a proper citation in the comments
+    of my program.
+*/
+
 //https://docs.oracle.com/javase/tutorial/uiswing/events/componentlistener.html
 //https://youtu.be/tHNWIWxRDDA
 //https://www.baeldung.com/java-play-sound
@@ -25,6 +46,12 @@ public class SceneFrame{
     JButton moveMatR, moveMatL;
     JButton lastTrack, pauseOrPlay, nextTrack;
 
+    /**
+        Constructs a SceneFrame with initial dimensions, and then calls pack().
+        It initializes the core containers, UI buttons, and the scene component.
+        @param width The initial width of the frame.
+        @param height The initial height of the frame.
+    */
     public SceneFrame(int width, int height){
         w = width;
         h = height;
@@ -49,6 +76,10 @@ public class SceneFrame{
         f.pack();
     }
 
+    /**
+        Sets up the Graphical User Interface components and layout.
+        This method sets up the JFrame properties and the JPanels.
+    */
     public void setUpGUI(){
         f.setSize(w,h);
         f.setFocusable(true);
@@ -72,6 +103,10 @@ public class SceneFrame{
         f.setVisible(true);
     }
 
+    /**
+        Initializes the background music system and playback controls.
+        It handles track switching and play/pause functionality through buttons.
+    */
     public void setUpMusic(){
         String[] soundTracks = {"track1.wav", "track2.wav", "track3.wav"};
         currentTrack = (int) (Math.random() * 3);
@@ -79,6 +114,10 @@ public class SceneFrame{
         try{
             AudioPlayer  audioPlayer = new AudioPlayer(soundTracks[currentTrack]);
 
+            /**
+                Inner LineListener to handle track ending events.
+                Automatically switches to the next track when a clip finishes.
+            */
             LineListener TrackListener = new LineListener(){
                 @Override
 
@@ -101,7 +140,10 @@ public class SceneFrame{
             audioPlayer.getClip().addLineListener(TrackListener);
             audioPlayer.play();
 
-            //buttons
+            /**
+                Inner ActionListener for music control buttons.
+                Manages ⏮️, ⏸️, and ⏭️ interactions.
+            */
             ActionListener TrackButtons = new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent ae){
@@ -154,7 +196,15 @@ public class SceneFrame{
         }
     }
 
+    /**
+        Sets up the animation timers for the scene.
+        Manages girl's breathing, blinking, and the day/night cycle transitions.
+    */
     public void setUpTimer(){
+        /**
+            Inner ActionListener for main frame updates.
+            Handles the progression of time and character idle animations.
+        */
         ActionListener TimedAction = new ActionListener(){
             @Override 
             public void actionPerformed(ActionEvent ae){
@@ -172,8 +222,8 @@ public class SceneFrame{
 
                 double moonYU = sceneComponent.getMoon().getYU();
                 double moonYD = sceneComponent.getMoon().getYD();
-                if(don == 0){ //day
-                    if(current == 0){ //sunrise
+                if(don == 0){
+                    if(current == 0){
                         if(sunYU - h*0.005 > 0){
                             sceneComponent.getSun().adjustY(-1*h*0.0025);
 
@@ -197,7 +247,7 @@ public class SceneFrame{
                             current = 1;
                         }
                     }
-                    else{ //sunset
+                    else{
                         if(sunYD + h*0.005 < f.getHeight()){
                             sceneComponent.getSun().adjustY(h*0.0025);
 
@@ -223,8 +273,8 @@ public class SceneFrame{
                         }
                     }
                 }
-                else{ //night
-                    if(current == 0){ //dusk
+                else{
+                    if(current == 0){
                         if(moonYU - h*0.005 > 0){
                             sceneComponent.getMoon().adjustY(-1*h*0.0025);
                             
@@ -248,7 +298,7 @@ public class SceneFrame{
                             current = 1;
                         }
                     }
-                    else{ //dawn
+                    else{
                         if(moonYD + h*0.005 < f.getHeight()){
                             sceneComponent.getMoon().adjustY(h*0.0025);
 
@@ -276,6 +326,10 @@ public class SceneFrame{
         Timer timer = new Timer(50, TimedAction);
         timer.start();
 
+        /**
+            Inner ActionListener for star twinkle effect.
+            Toggles star opacity periodically.
+        */
         ActionListener Twinkle = new ActionListener(){
             public static int i = 0;
             public void actionPerformed(ActionEvent ae){
@@ -293,7 +347,14 @@ public class SceneFrame{
         colors.start();
     }
 
+    /**
+        Sets up Action, Component, and Key listeners for the frame.
+        Handles mat movement, window resizing, and keyboard shortcuts.
+    */
     public void setUpListener(){
+        /**
+            Inner ActionListener for shifting the mat left and right.
+        */
         ActionListener MoveMatListener = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
@@ -326,6 +387,11 @@ public class SceneFrame{
         };
         moveMatR.addActionListener(MoveMatListener);
         moveMatL.addActionListener(MoveMatListener);
+
+        /**
+            Inner ComponentListener to handle frame resizing.
+            Redraws the scene to maintain proportions.
+        */
         ComponentListener HomeFrameListener = new ComponentListener(){
             @Override
             public void componentHidden(ComponentEvent e){
@@ -351,6 +417,10 @@ public class SceneFrame{
         };
         panel.addComponentListener(HomeFrameListener);
 
+        /**
+            Inner KeyListener for controls via keys.
+            Listens for D (Day), N (Night), S (Stars), B (Books), and L (Lamp).
+        */
         KeyListener keyCommands = new KeyListener(){
             @Override
 
@@ -402,3 +472,16 @@ public class SceneFrame{
     }
     
 }
+
+/**
+REFERENCES:
+    1. Oracle. "How to Write a Component Listener." https://docs.oracle.com/javase/tutorial/uiswing/events/componentlistener.html
+    2. BroCode YouTube Tutorial. "Java 2D animation 🎞️." https://youtu.be/tHNWIWxRDDA
+    3. Baeldung. "How to Play Sound With Java." https://www.baeldung.com/java-play-sound
+    4. GeeksforGeeks. "Java KeyListener in AWT." https://www.geeksforgeeks.org/java/java-keylistener-in-awt/
+    5. Emojipedia. https://emojipedia.org/
+    6. Oracle Documentation. "Interface Clip." https://docs.oracle.com/javase/8/docs/api/javax/sound/sampled/Clip.html
+    7. Pixabay Lofi Music. "Lofi Chill." https://pixabay.com/music/lofi-lofi-chill-487321/
+    8. Pixabay Lofi Music. "Good Night Lofi Cozy Chill." https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/
+    9. Pixabay Lofi Music. "Lofi Study Calm Peaceful." https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/
+*/
