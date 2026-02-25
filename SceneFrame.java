@@ -102,7 +102,7 @@ public class SceneFrame{
         f.pack();
         w = f.getWidth();
         h = f.getHeight();
-        
+
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }
