@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.geom.*;
 
 public class Sky implements DrawingObject{
     Color c1, c2, c3;

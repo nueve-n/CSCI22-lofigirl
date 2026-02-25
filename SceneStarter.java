@@ -1,6 +1,3 @@
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class SceneStarter{
     public static void main(String[] args){
         int w = 800;

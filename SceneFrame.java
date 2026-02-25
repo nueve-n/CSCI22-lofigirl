@@ -179,12 +179,12 @@ public class SceneFrame{
 
                             if(sunYU > h*0.40){
                                 sceneComponent.getOutside().changeColor(Color.decode("#eaa02a"), Color.decode("#ebb258"), Color.decode("#f3c67f"));
-                                sceneComponent.getBg().changeColor(Color.decode("#e3ab61"), Color.decode("#cf9850"), Color.decode("#6e3f16"), Color.decode("#643913"));
+                                sceneComponent.getBG().changeColor(Color.decode("#e3ab61"), Color.decode("#cf9850"), Color.decode("#6e3f16"), Color.decode("#643913"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
                                 sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"), Color.decode("#9fd4ff"), Color.decode("#8fcdff"));
-                                sceneComponent.getBg().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
+                                sceneComponent.getBG().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 0));
                             }
 
@@ -203,12 +203,12 @@ public class SceneFrame{
 
                             if(sunYU > h*0.40){
                                 sceneComponent.getOutside().changeColor(Color.decode("#f050ab"), Color.decode("#f668b9"), Color.decode("#fd7dc6"));
-                                sceneComponent.getBg().changeColor(Color.decode("#ffc895"), Color.decode("#e7b586"), Color.decode("#6e3511"), Color.decode("#5f2e10"));
+                                sceneComponent.getBG().changeColor(Color.decode("#ffc895"), Color.decode("#e7b586"), Color.decode("#6e3511"), Color.decode("#5f2e10"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
                                 sceneComponent.getOutside().changeColor(Color.decode("#b4d8f6"), Color.decode("#9fd4ff"), Color.decode("#8fcdff"));
-                                sceneComponent.getBg().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
+                                sceneComponent.getBG().changeColor(Color.decode("#ffe495"), Color.decode("#e9d188"), Color.decode("#5f2e10"), Color.decode("#4a240d"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 0));
                             }
 
@@ -230,12 +230,12 @@ public class SceneFrame{
                             
                             if(moonYU > h*0.40){
                                 sceneComponent.getOutside().changeColor(Color.decode("#330d62"), Color.decode("#290752"), Color.decode("#220645"));
-                                sceneComponent.getBg().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
+                                sceneComponent.getBG().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
                             }
                             else{
                                 sceneComponent.getOutside().changeColor(Color.decode("#040731"), Color.decode("#030521"), Color.decode("#010319"));
-                                sceneComponent.getBg().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
+                                sceneComponent.getBG().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
                                 sceneComponent.getLamp().changeColor(new Color(255, 203, 139, 127));
 
                             }
@@ -254,11 +254,11 @@ public class SceneFrame{
 
                             if(moonYU > h*0.40){
                                 sceneComponent.getOutside().changeColor(Color.decode("#330d62"), Color.decode("#290752"), Color.decode("#220645"));
-                                sceneComponent.getBg().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
+                                sceneComponent.getBG().changeColor(Color.decode("#c6b276"), Color.decode("#ae9e6e"), Color.decode("#53280d"), Color.decode("#48220b"));
                             }
                             else{
                                 sceneComponent.getOutside().changeColor(Color.decode("#040731"), Color.decode("#030521"), Color.decode("#010319"));
-                                sceneComponent.getBg().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
+                                sceneComponent.getBG().changeColor(Color.decode("#bba86f"), Color.decode("#9a8c61"), Color.decode("#49230c"), Color.decode("#41200b"));
                             }
 
                             f.repaint();

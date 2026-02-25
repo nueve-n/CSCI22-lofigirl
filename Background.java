@@ -1,12 +1,11 @@
 import java.awt.*;
 import java.awt.geom.*;
-import javax.swing.*;
 
-public class Bg implements DrawingObject{
+public class Background implements DrawingObject{
     double w, h;
     Color wallC, wallCS, floorC, floorCS;
     
-    public Bg(double w, double h){
+    public Background(double w, double h){
         this.w = w;
         this.h = h;
 

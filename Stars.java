@@ -1,8 +1,6 @@
 //https://www.w3schools.com/java/ref_math_round.asp
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.*;
 import java.util.*;
 
 public class Stars implements DrawingObject{

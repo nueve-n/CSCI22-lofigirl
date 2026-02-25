@@ -1,8 +1,6 @@
 //https://www.geeksforgeeks.org/java/java-math-random-method-examples/
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.*;
 import java.util.*;
 
 public class Shelf implements DrawingObject{

@@ -5,8 +5,7 @@ public class Chair implements DrawingObject {
     private double x, y, w, h;
     private Color light, shadow1, shadow2;
 
-    public Chair(double x, double y, double w, double h,
-                 Color light, Color shadow1, Color shadow2) {
+    public Chair(double x, double y, double w, double h, Color light, Color shadow1, Color shadow2) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -19,8 +18,6 @@ public class Chair implements DrawingObject {
     @Override
     public void draw(Graphics2D g2d) {
 
-        // Rectangle hitbox = new Rectangle(x, y, w, h, Color.WHITE);
-        // hitbox.draw(g2d);
         Quadrilateral backrest = new Quadrilateral(
             x + w * 0.075, y,
             x + w * 0.3, y - h * 0.05,
@@ -56,19 +53,35 @@ public class Chair implements DrawingObject {
         );
 
         Rectangle support = new Rectangle(
-            x + w * 0.075, y + h * 0.75, w * 0.825, h * 0.1, shadow1
+            x + w * 0.075, 
+            y + h * 0.75, 
+            w * 0.825, 
+            h * 0.1, 
+            shadow1
         );
 
         Rectangle foot1 = new Rectangle(
-            x + w * 0.075, y + h * 0.85, w * 0.12, h * 0.30, shadow2
+            x + w * 0.075, 
+            y + h * 0.85, 
+            w * 0.12, 
+            h * 0.30, 
+            shadow2
         );
 
         Rectangle foot2 = new Rectangle(
-            x + w * 0.73, y + h * 0.85, w * 0.12, h * 0.30, shadow2
+            x + w * 0.73, 
+            y + h * 0.85, 
+            w * 0.12, 
+            h * 0.30, 
+            shadow2
         );
 
         Rectangle foot3 = new Rectangle(
-            x + w * 0.3, y + h * 0.65, w * 0.115, h * 0.28, shadow2
+            x + w * 0.3, 
+            y + h * 0.65, 
+            w * 0.115, 
+            h * 0.28, 
+            shadow2
         );
         
         foot3.draw(g2d);

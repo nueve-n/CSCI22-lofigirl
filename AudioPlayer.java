@@ -2,8 +2,8 @@ import javax.sound.sampled.*;
 import java.io.*;
 
 public class AudioPlayer{
-    public Clip clip;
-    public String status;
+    private Clip clip;
+    private String status;
 
     AudioInputStream audioInputStream;
     public static String filePath;

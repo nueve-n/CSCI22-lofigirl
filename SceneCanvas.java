@@ -1,6 +1,5 @@
 import java.util.*;
 import java.awt.*;
-import java.awt.geom.*;
 import javax.swing.*;
 
 public class SceneCanvas extends JComponent{
@@ -15,7 +14,7 @@ public class SceneCanvas extends JComponent{
     Celestial sun;
     Celestial moon;
     Stars stars;
-    Bg bg;
+    Background background;
     Window windowWeather;
     Sky outside;
     Girl girl;
@@ -38,7 +37,7 @@ public class SceneCanvas extends JComponent{
         tableFeet = new TableBackFeet(w*0.50, h*0.60, w*0.35, h * 0.15, Color.decode("#231818"));
         sun = new Celestial(w*0.5 + w*0.13, h*0.75, w*0.1, Color.decode("#ebb000"), Color.decode("#e3bf55"), Color.decode("#dcc376"), Color.decode("#d9c58a"));
         moon = new Celestial(w*0.5 + w*0.13, h, w*0.1, Color.decode("#ffebb1"), Color.decode("#d2c5a1"), Color.decode("#b9b19a"), Color.decode("#b1ab9a"));
-        bg = new Bg(w, h);
+        background = new Background(w, h);
         outside = new Sky(w, h, Color.decode("#eaa02a"), Color.decode("#ebb258"), Color.decode("#f3c67f"));
         stars = new Stars(w*0.5, h*0.1, w*0.40, h*0.5);
         lamp = new Lamp(w*0.02, h*0.375, w*0.1, h*0.4);
@@ -72,7 +71,7 @@ public class SceneCanvas extends JComponent{
         objects.add(stars);
         objects.add(sun);
         objects.add(moon);
-        objects.add(bg);
+        objects.add(background);
         objects.add(windowWeather);
         objects.add(mat);
         objects.add(shelf);
@@ -126,8 +125,8 @@ public class SceneCanvas extends JComponent{
         return stars;
     }
 
-    public Bg getBg(){
-        return bg;
+    public Background getBG(){
+        return background;
     }
 
     public Lamp getLamp(){
