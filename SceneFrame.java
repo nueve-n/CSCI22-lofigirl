@@ -159,6 +159,11 @@ public class SceneFrame{
             @Override 
             public void actionPerformed(ActionEvent ae){
                 sceneComponent.getGirl().breathe();
+                sceneComponent.getGirl().blink();
+    
+                if (Math.random() < 0.015) { 
+                    sceneComponent.getGirl().startBlink();
+                }
                 sceneComponent.getGirlArms().animate();
                 sceneComponent.repaint();
 

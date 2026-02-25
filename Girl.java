@@ -13,10 +13,13 @@ public class Girl implements DrawingObject {
     static double baseY = 35;
     double x, y, w, h;
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
-    double breathPhase = 0;
+    double breathProgress = 0;
     double breathSpeed = 0.09;
     double eyeX = 401.8;
     double eyeY = 238.9;
+    double blinkProgress = 0;
+    boolean isBlinking = false;
+    double blinkSpeed = 0.30;
 
     public Girl(
         double x, double y, double w, double h, 
@@ -125,12 +128,15 @@ public class Girl implements DrawingObject {
         eyebrow.quadTo(389.5, 215.2, 371.3, 222.1);
         eyebrow.closePath();
 
-        Line2D.Double eyelash = new Line2D.Double(
-            374.5, 236.3, eyeX, eyeY
-        );
-       
+        double cEyeHeight = 20.0 * (1.0 - (blinkProgress * 0.95)); 
+        double eyeYAdd = 10.0 * blinkProgress;
+
         Ellipse2D.Double eye = new Ellipse2D.Double(
-            384.6, 234.8, 15.0, 20.0
+            384.6, 234.8 + eyeYAdd, 15.0, cEyeHeight
+        );
+
+        Line2D.Double eyelash = new Line2D.Double(
+            374.5, 236.3 + (10 * blinkProgress), 401.8, 238.9 + (10 * blinkProgress)
         );
 
         Path2D.Double hairtie = new Path2D.Double();
@@ -160,7 +166,7 @@ public class Girl implements DrawingObject {
         g2d.setColor(pants1C);
         g2d.fill(at.createTransformedShape(pants1));
         
-        double multiplier = (Math.sin(breathPhase) + 1) / 2;
+        double multiplier = (Math.sin(breathProgress) + 1) / 2;
         double breatheY = 1 + 0.012 * multiplier;
         double breatheX = 1 + 0.02 * multiplier;
         double breatheShift = -18 * multiplier;
@@ -204,10 +210,27 @@ public class Girl implements DrawingObject {
     }
 
     public void breathe() {
-        breathPhase += breathSpeed;
+        breathProgress += breathSpeed;
     }
 
     public void blink() {
+        if (isBlinking) {
+            
+            blinkProgress += blinkSpeed;
+            
+            if (blinkProgress >= 1.0) {
+                blinkProgress = 1.0;
+                isBlinking = false;
+            }
+        } 
 
+        else if (blinkProgress > 0) {
+            blinkProgress -= blinkSpeed;
+            if (blinkProgress < 0) blinkProgress = 0;
+        }
+    }
+
+    public void startBlink() {
+        isBlinking = true;
     }
 }
