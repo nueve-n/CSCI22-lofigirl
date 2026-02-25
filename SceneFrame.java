@@ -158,6 +158,7 @@ public class SceneFrame{
             @Override 
             public void actionPerformed(ActionEvent ae){
                 sceneComponent.getGirl().breathe();
+                sceneComponent.getGirlArms().breathe();
                 sceneComponent.repaint();
 
                 double sunYU = sceneComponent.getSun().getYU();
