@@ -15,6 +15,8 @@ public class Girl implements DrawingObject {
     Color skinC, socks2C, socks1C, pants2C, pants1C, sweaterC, hairC, headphonesOuterC, headphonesInnerC;
     double breathPhase = 0;
     double breathSpeed = 0.09;
+    double eyeX = 401.8;
+    double eyeY = 238.9;
 
     public Girl(
         double x, double y, double w, double h, 
@@ -124,7 +126,7 @@ public class Girl implements DrawingObject {
         eyebrow.closePath();
 
         Line2D.Double eyelash = new Line2D.Double(
-            374.5, 236.3, 401.8, 238.9
+            374.5, 236.3, eyeX, eyeY
         );
        
         Ellipse2D.Double eye = new Ellipse2D.Double(
@@ -203,5 +205,9 @@ public class Girl implements DrawingObject {
 
     public void breathe() {
         breathPhase += breathSpeed;
+    }
+
+    public void blink() {
+
     }
 }

@@ -16,6 +16,8 @@ public class GirlArms implements DrawingObject {
     Color sweaterC, sweaterShadowC, skinC, skinShadowC;
     double breathPhase = 0;
     double breathSpeed = 0.09;
+    double typingPhase = 0;
+    double typingSpeed = 1;
 
     public GirlArms(
         double x, double y, double w, double h, 
@@ -50,32 +52,32 @@ public class GirlArms implements DrawingObject {
         
         Path2D.Double sleeveLower2 = new Path2D.Double();
         sleeveLower2.moveTo(417.1,495.3);
-        sleeveLower2.quadTo(514.7, 532.2, 628.8, 559.4);
-        sleeveLower2.quadTo(622.2, 587.5, 615.7, 615.7);
+        sleeveLower2.quadTo(514.7, 532.2, 653.1, 557.4);
+        sleeveLower2.quadTo(622.2, 587.5, 640.4, 617.6);
         sleeveLower2.quadTo(498.2, 596.3, 380.7, 576.8);
         sleeveLower2.closePath();
 
         Path2D.Double sleeveLower1 = new Path2D.Double();
         sleeveLower1.moveTo(367.6, 569.1);
-        sleeveLower1.quadTo(498.2, 591.4, 628.8, 613.7);
-        sleeveLower1.quadTo(621.3, 657.4, 613.7, 701.1);
+        sleeveLower1.quadTo(498.2, 591.4, 660.8, 612.6);
+        sleeveLower1.quadTo(621.3, 657.4, 648.2, 690.9);
         sleeveLower1.quadTo(389.4, 705.0, 306.4, 681.7);
         sleeveLower1.closePath();
         
         Path2D.Double hand1 = new Path2D.Double();
-        hand1.moveTo(619.0, 679.0);
+        hand1.moveTo(599.0, 679.0);
         hand1.quadTo(646.3, 684.4, 709.7, 666.7);
         hand1.quadTo(733.2, 673.0, 761.3, 669.8);
         hand1.quadTo(780.3, 648.9, 719.4, 606.3);
-        hand1.quadTo(710.5, 600.9, 624.3, 630.5);
+        hand1.quadTo(710.5, 600.9, 604.3, 630.5);
         hand1.closePath();
 
         Path2D.Double hand2 = new Path2D.Double();
-        hand2.moveTo(626.3, 604.1);
+        hand2.moveTo(606.3, 604.1);
         hand2.quadTo(655.2, 613.5, 714.1, 589.7);
         hand2.quadTo(736.8, 601.3, 755.1, 599.6);
         hand2.quadTo(774.5, 581.3, 711.8, 555.2);
-        hand2.quadTo(695.7, 551.9, 630.7, 569.7);
+        hand2.quadTo(695.7, 551.9, 610.7, 569.7);
         hand2.closePath();
 
         AffineTransform at = new AffineTransform();
@@ -84,8 +86,8 @@ public class GirlArms implements DrawingObject {
         at.scale(w/baseWidth, h/baseHeight);
         at.translate(-baseX, -baseY);
 
-        double multiplier = (Math.sin(breathPhase) + 1) / 2;
-        double breatheShift = -18 * multiplier;
+        double breathMultiplier = (Math.sin(breathPhase) + 1) / 2;
+        double breatheShift = -18 * breathMultiplier;
 
         AffineTransform sweaterSleeveAT = new AffineTransform(at);
 
@@ -93,11 +95,24 @@ public class GirlArms implements DrawingObject {
         sweaterSleeveAT.translate(0, breatheShift * 0.75);        
         sweaterSleeveAT.translate(0, -600);
 
-        AffineTransform typingAT = new AffineTransform(sweaterSleeveAT);
+        double typingMultiplier = Math.sin(typingPhase);
 
-        typingAT.translate(613.7, 701.1);
-        typingAT.rotate(Math.toRadians(-15));
-        typingAT.translate(-613.7, -701.1);
+        AffineTransform typingRightAT = new AffineTransform(sweaterSleeveAT);
+
+        typingRightAT.translate(613.7, 701.1);
+        typingRightAT.rotate(Math.toRadians(5 * typingMultiplier));
+        typingRightAT.translate(-613.7, -701.1);
+
+        AffineTransform typingLeftAT = new AffineTransform(sweaterSleeveAT);
+
+        typingLeftAT.translate(613.7, 701.1);
+        typingLeftAT.rotate(Math.toRadians(-5 * typingMultiplier));
+        typingLeftAT.translate(-613.7, -701.1);
+
+        g2d.setColor(skinC);
+        g2d.fill(typingLeftAT.createTransformedShape(hand2));
+        g2d.setColor(skinShadowC);
+        g2d.fill(typingRightAT.createTransformedShape(hand1));
 
         g2d.setColor(sweaterC);
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveUpper2));
@@ -105,14 +120,10 @@ public class GirlArms implements DrawingObject {
         g2d.setColor(sweaterShadowC);
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveUpper1));
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveLower1));
-
-        g2d.setColor(skinC);
-        g2d.fill(typingAT.createTransformedShape(hand2));
-        g2d.setColor(skinShadowC);
-        g2d.fill(typingAT.createTransformedShape(hand1));
     }
 
-    public void breathe() {
+    public void animate() {
         breathPhase += breathSpeed;
+        typingPhase += typingSpeed;
     }
 }
