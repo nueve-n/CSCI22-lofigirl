@@ -1,6 +1,7 @@
 //https://codingtechroom.com/question/-affine-transform-scale-center-java
 //https://codingtechroom.com/question/java-graphics2d-translate-scale
 //https://www.geeksforgeeks.org/java/java-math-sin-method-examples/
+//https://www.javathinking.com/blog/rotating-image-with-affinetransform/
 
 
 import java.awt.*;
@@ -62,19 +63,19 @@ public class GirlArms implements DrawingObject {
         sleeveLower1.closePath();
         
         Path2D.Double hand1 = new Path2D.Double();
-        hand1.moveTo(613.5, 676.2);
+        hand1.moveTo(619.0, 679.0);
         hand1.quadTo(646.3, 684.4, 709.7, 666.7);
         hand1.quadTo(733.2, 673.0, 761.3, 669.8);
         hand1.quadTo(780.3, 648.9, 719.4, 606.3);
-        hand1.quadTo(710.5, 600.9, 620.9, 630.5);
+        hand1.quadTo(710.5, 600.9, 624.3, 630.5);
         hand1.closePath();
 
         Path2D.Double hand2 = new Path2D.Double();
-        hand2.moveTo(622.9, 603.0);
+        hand2.moveTo(626.3, 604.1);
         hand2.quadTo(655.2, 613.5, 714.1, 589.7);
         hand2.quadTo(736.8, 601.3, 755.1, 599.6);
         hand2.quadTo(774.5, 581.3, 711.8, 555.2);
-        hand2.quadTo(695.7, 551.9, 626.3, 568.6);
+        hand2.quadTo(695.7, 551.9, 630.7, 569.7);
         hand2.closePath();
 
         AffineTransform at = new AffineTransform();
@@ -92,19 +93,11 @@ public class GirlArms implements DrawingObject {
         sweaterSleeveAT.translate(0, breatheShift * 0.75);        
         sweaterSleeveAT.translate(0, -600);
 
-        // AffineTransform typingAT = new AffineTransform(sweaterSleeveAT);
+        AffineTransform typingAT = new AffineTransform(sweaterSleeveAT);
 
-        // typingAT.translate 
-
-        AffineTransform old = g2d.getTransform();
-
-        g2d.rotate(Math.toRadians(15));
-        g2d.setColor(skinC);
-        g2d.fill(sweaterSleeveAT.createTransformedShape(hand2));
-        g2d.setColor(skinShadowC);
-        g2d.fill(sweaterSleeveAT.createTransformedShape(hand1));
-
-        g2d.setTransform(old);
+        typingAT.translate(613.7, 701.1);
+        typingAT.rotate(Math.toRadians(-15));
+        typingAT.translate(-613.7, -701.1);
 
         g2d.setColor(sweaterC);
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveUpper2));
@@ -112,6 +105,11 @@ public class GirlArms implements DrawingObject {
         g2d.setColor(sweaterShadowC);
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveUpper1));
         g2d.fill(sweaterSleeveAT.createTransformedShape(sleeveLower1));
+
+        g2d.setColor(skinC);
+        g2d.fill(typingAT.createTransformedShape(hand2));
+        g2d.setColor(skinShadowC);
+        g2d.fill(typingAT.createTransformedShape(hand1));
     }
 
     public void breathe() {
