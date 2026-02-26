@@ -45,6 +45,7 @@ public class SceneFrame{
     SceneCanvas sceneComponent;
     JButton moveMatR, moveMatL;
     JButton lastTrack, pauseOrPlay, nextTrack;
+    int cooldownTimer = 0;
 
     /**
         Constructs a SceneFrame with initial dimensions, and then calls pack().
@@ -211,8 +212,11 @@ public class SceneFrame{
                 sceneComponent.getGirl().breathe();
                 sceneComponent.getGirl().blink();
     
-                if (Math.random() < 0.015) { 
+                cooldownTimer ++;
+
+                if (cooldownTimer == 80 || Math.random() < 0.015) { 
                     sceneComponent.getGirl().startBlink();
+                    cooldownTimer = 0;
                 }
                 sceneComponent.getGirlArms().animate();
                 sceneComponent.repaint();
