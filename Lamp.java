@@ -41,7 +41,7 @@ public class Lamp implements DrawingObject{
         this.w = w;
         this.h = h;
 
-        lightC = new Color(255, 203, 139, 127);
+        lightC = new Color(255, 203, 139, 127*2);
     }
 
     /**
@@ -67,11 +67,24 @@ public class Lamp implements DrawingObject{
         light.quadTo(x + w*0.5, y + h + h*0.1, x - w*0.1, y + h);
         light.closePath();
 
+        LinearGradientPaint beamGradient = new LinearGradientPaint(
+                (float) (x + w*0.1), (float) (y + h*0.05*0.5),
+                (float) (x + w + w*0.1), (float) (y + h),
+                new float[]{0f, 1f},
+                new Color[]{
+                    lightC,
+                    new Color(255, 203, 139, 0)
+                }
+        );
+
+        g2d.setPaint(beamGradient);
+        g2d.fill(light);
+
         Rectangle stand = new Rectangle(x + (w * 0.45), y, w * 0.1, h, Color.decode("#3b2410"));
         Ellipse base = new Ellipse(x, y + (h * 0.95), w, h * 0.05, Color.decode("#251501"));
 
-        g2d.setColor(lightC);
-        g2d.fill(light);
+        //g2d.setColor(lightC);
+        //g2d.fill(light);
         stand.draw(g2d);
         base.draw(g2d);
         g2d.setColor(Color.decode("#ffedab"));
